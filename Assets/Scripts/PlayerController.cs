@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D mainRigidbody;
+    [SerializeField] private Rigidbody2D futureBody;
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
@@ -49,13 +50,20 @@ public class PlayerController : MonoBehaviour
             move.y = jumpSpeed;
         }
         mainRigidbody.velocity = move;
-/*        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            isgrounded = false;
-            mainRigidbody.AddForce(new Vector2(0, 500));
 
-        }*/
-        
+        StartCoroutine(MoveFutureSelf(move));
+        IEnumerator MoveFutureSelf(Vector3 move)
+        {
+            yield return new WaitForSeconds(5f);
+            futureBody.velocity = move;
+        }
+        /*        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+                {
+                    isgrounded = false;
+                    mainRigidbody.AddForce(new Vector2(0, 500));
+
+                }*/
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
