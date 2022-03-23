@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 9688023}
   - component: {fileID: 9688022}
   - component: {fileID: 9688021}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (3)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 320353494}
   - component: {fileID: 320353493}
   - component: {fileID: 320353492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (6)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 661297778}
   - component: {fileID: 661297777}
   - component: {fileID: 661297776}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (3)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 741637117}
   - component: {fileID: 741637116}
   - component: {fileID: 741637115}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (4)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 842002955}
   - component: {fileID: 842002954}
   - component: {fileID: 842002953}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (2)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -1341,6 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1478147202}
+  futurePlayer: {fileID: 0}
   cameraMove: {fileID: 222279332}
   inPast: 1
 --- !u!1 &962195835
@@ -1631,7 +1632,7 @@ GameObject:
   - component: {fileID: 1323602691}
   - component: {fileID: 1323602690}
   - component: {fileID: 1323602689}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (2)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -1759,7 +1760,7 @@ GameObject:
   - component: {fileID: 1416257339}
   - component: {fileID: 1416257341}
   - component: {fileID: 1416257340}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -1892,8 +1893,12 @@ MonoBehaviour:
   mainRigidbody: {fileID: 1478147200}
   futureBody: {fileID: 1997874085}
   mainSpriteRenderer: {fileID: 1478147201}
+  futureSpriteRenderer: {fileID: 1997874086}
   moveSpeed: 7
   jumpSpeed: 12
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!61 &1478147199
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2018,7 +2023,7 @@ GameObject:
   - component: {fileID: 1577965094}
   - component: {fileID: 1577965093}
   - component: {fileID: 1577965092}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (5)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -2033,7 +2038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577965090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 3.87, z: 5.1090736}
+  m_LocalPosition: {x: -0.33, y: 1.73, z: 5.1090736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1795317535}
@@ -2147,7 +2152,7 @@ GameObject:
   - component: {fileID: 1677296066}
   - component: {fileID: 1677296065}
   - component: {fileID: 1677296064}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (4)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -2368,7 +2373,7 @@ GameObject:
   - component: {fileID: 1704031981}
   - component: {fileID: 1704031980}
   - component: {fileID: 1704031979}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -2641,6 +2646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1478147202}
+  futurePlayer: {fileID: 0}
   cameraMove: {fileID: 222279332}
   inPast: 0
 --- !u!61 &1732669943
@@ -3007,7 +3013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997874082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.07, y: -0.41, z: 0}
+  m_LocalPosition: {x: 43.07, y: -0.33, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}

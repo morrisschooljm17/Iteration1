@@ -7,8 +7,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D mainRigidbody;
     [SerializeField] private Rigidbody2D futureBody;
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
+    [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
+    public LayerMask groundLayer;
 
     bool isgrounded = true;
     bool flap = true;
@@ -32,6 +34,22 @@ public class PlayerController : MonoBehaviour
                     mainRigidbody.AddForce(new Vector2(moveSpeed, 0));
                     mainSpriteRenderer.flipX = true;
                 }*/
+        bool IsGrounded()
+        {
+            Vector2 position = transform.position;
+            Vector2 direction = Vector2.down;
+            float distance = 1.215f;
+
+            RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+            Debug.Log(hit.distance);
+            if (hit.collider != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         Vector2 move = mainRigidbody.velocity;
         float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
@@ -44,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
 
         move.x = hor * moveSpeed;
-        if (Input.GetKeyDown(KeyCode.W) && isgrounded)
+        if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
             isgrounded = false;
             move.y = jumpSpeed;
@@ -55,24 +73,26 @@ public class PlayerController : MonoBehaviour
         IEnumerator MoveFutureSelf(Vector3 move)
         {
             yield return new WaitForSeconds(5f);
+            if (move.x < 0)
+            {
+                futureSpriteRenderer.flipX = false;
+            }
+            else if (move.x > 0)
+            {
+                futureSpriteRenderer.flipX = true;
+            }
             futureBody.velocity = move;
         }
-        /*        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
-                {
-                    isgrounded = false;
-                    mainRigidbody.AddForce(new Vector2(0, 500));
-
-                }*/
 
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+/*    void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "floor")
         {
             isgrounded = true;
             flap = true;
         }
-    }
+    }*/
 
 }
