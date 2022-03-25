@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - floor
+  - TimeMachine
+  - door
+  - lever
   layers:
   - Default
   - TransparentFX

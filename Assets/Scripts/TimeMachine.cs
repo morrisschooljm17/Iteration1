@@ -35,7 +35,7 @@ public class TimeMachine : MonoBehaviour
             cameraMove.position += newPos;
         }
     }
-    void OnTriggerEnter2D(Collider2D col)
+/*    void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("Trigger");
         objectMove = col.GetComponent<Transform>();
@@ -46,5 +46,5 @@ public class TimeMachine : MonoBehaviour
         Debug.Log("Trigger left");
         objectMove = null;
         lever = false;
-    }
+    }*/
 }

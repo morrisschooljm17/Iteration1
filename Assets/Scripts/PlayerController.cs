@@ -9,15 +9,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private float moveSpeed;
+    private bool inPast = true;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private Transform cameraMove;
+    [SerializeField] private Transform door;
+    private Vector3 newPos;
     public LayerMask groundLayer;
 
     bool isgrounded = true;
-    bool flap = true;
+    bool onTimeMachine;
+    bool onLever;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (inPast == true)
+        {
+            newPos = new Vector3(50, 0, 0);
+        }
+        else
+        {
+            newPos = new Vector3(-50, 0, 0);
+        }
 
     }
 
@@ -48,6 +61,22 @@ public class PlayerController : MonoBehaviour
             }
 
             return false;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (onTimeMachine)
+            {
+                inPast = false;
+                transform.position += newPos;
+                //futurePlayer.position += newPos;
+                cameraMove.position += newPos;
+            }
+            else if (onLever)
+            {
+
+                door.position += new Vector3(0, 5, 0);
+            }
+
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -85,14 +114,31 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
-/*    void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "floor")
+        if (col.gameObject.tag == "TimeMachine")
         {
-            isgrounded = true;
-            flap = true;
+            Debug.Log("Time enter");
+            onTimeMachine = true;
         }
-    }*/
+        if (col.gameObject.tag == "lever")
+        {
+            onLever = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "TimeMachine")
+        {
+            Debug.Log("Time leave");
+            onTimeMachine = false;
+        }
+        if (col.gameObject.tag == "lever")
+        {
+            onLever = false;
+        }
+    }
+
 
 }

@@ -1232,7 +1232,7 @@ GameObject:
   - component: {fileID: 953541981}
   m_Layer: 0
   m_Name: darkbrown (1)
-  m_TagString: Untagged
+  m_TagString: TimeMachine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1896,6 +1896,7 @@ MonoBehaviour:
   futureSpriteRenderer: {fileID: 1997874086}
   moveSpeed: 7
   jumpSpeed: 12
+  cameraMove: {fileID: 222279332}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2038,7 +2039,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577965090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 1.73, z: 5.1090736}
+  m_LocalPosition: {x: -0.33, y: 1.03, z: 5.1090736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1795317535}
