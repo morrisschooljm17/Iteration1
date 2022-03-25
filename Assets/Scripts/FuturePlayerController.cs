@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class FuturePlayerController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D mainRigidbody;
 
-    [SerializeField] private SpriteRenderer mainSpriteRenderer;
+    [SerializeField] private Rigidbody2D futureBody;
+    [SerializeField] private SpriteRenderer futureSpriteRenderer;
 
     [SerializeField] private float moveSpeed;
     private bool inPast = true;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private Transform cameraMove;
+
     [SerializeField] private Transform door;
     private Vector3 newPos;
     public LayerMask groundLayer;
@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     bool isgrounded = true;
     bool onTimeMachine;
     bool onLever;
+    bool hitLever = false;
+    bool hitTime = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,16 +39,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                {
-                    mainRigidbody.AddForce(new Vector2(-moveSpeed, 0));
-                    mainSpriteRenderer.flipX = false;
-                }
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                {
-                    mainRigidbody.AddForce(new Vector2(moveSpeed, 0));
-                    mainSpriteRenderer.flipX = true;
-                }*/
+        hitLever = false;
+        hitTime = false;
+
         bool IsGrounded()
         {
             Vector2 position = transform.position;
@@ -66,29 +61,18 @@ public class PlayerController : MonoBehaviour
         {
             if (onTimeMachine)
             {
-                inPast = false;
-                transform.position += newPos;
+                hitTime = true;
                 //futurePlayer.position += newPos;
-                cameraMove.position += newPos;
             }
             else if (onLever)
             {
-
-                door.position += new Vector3(0, 5, 0);
+                hitLever = true;
             }
 
         }
 
-        Vector2 move = mainRigidbody.velocity;
+        Vector2 move = futureBody.velocity;
         float hor = Input.GetAxis("Horizontal");
-        if (hor < 0)
-        {
-            mainSpriteRenderer.flipX = false;
-        }
-        else if (hor > 0)
-        {
-            mainSpriteRenderer.flipX = true;
-        }
 
         move.x = hor * moveSpeed;
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
@@ -96,7 +80,30 @@ public class PlayerController : MonoBehaviour
             isgrounded = false;
             move.y = jumpSpeed;
         }
-        mainRigidbody.velocity = move;
+
+        StartCoroutine(MoveFutureSelf(move, hitTime, hitLever));
+        IEnumerator MoveFutureSelf(Vector3 move, bool hitLever, bool hitTime)
+        {
+            yield return new WaitForSeconds(5f);
+            if (move.x < 0)
+            {
+                futureSpriteRenderer.flipX = false;
+            }
+            else if (move.x > 0)
+            {
+                futureSpriteRenderer.flipX = true;
+            }
+            
+            if (hitLever)
+            {
+                door.position += new Vector3(0, 5, 0);
+            }
+            else if (hitTime)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+            futureBody.velocity = move;
+        }
 
     }
     private void OnTriggerEnter2D(Collider2D col)

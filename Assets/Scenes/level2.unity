@@ -377,7 +377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117435155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.07, y: 12.57, z: 0}
+  m_LocalPosition: {x: -6.67, y: 12.57, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 869937247}
   - component: {fileID: 869937246}
   - component: {fileID: 869937245}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (5)
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -1853,7 +1853,7 @@ GameObject:
   - component: {fileID: 1427211534}
   - component: {fileID: 1427211536}
   - component: {fileID: 1427211535}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -2329,6 +2329,7 @@ GameObject:
   - component: {fileID: 1551581344}
   - component: {fileID: 1551581346}
   - component: {fileID: 1551581345}
+  - component: {fileID: 1551581347}
   m_Layer: 0
   m_Name: door1
   m_TagString: door
@@ -2361,7 +2362,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -2427,6 +2428,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &1551581347
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551581343}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1629815345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,14 +2797,14 @@ MonoBehaviour:
   mainRigidbody: {fileID: 1847504587}
   futureBody: {fileID: 117435157}
   mainSpriteRenderer: {fileID: 1847504588}
-  futureSpriteRenderer: {fileID: 0}
+  futureSpriteRenderer: {fileID: 117435158}
   moveSpeed: 7
   jumpSpeed: 12
   cameraMove: {fileID: 1274746167}
   door: {fileID: 1551581344}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!61 &1847504586
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3024,7 +3044,7 @@ GameObject:
   - component: {fileID: 2040451007}
   - component: {fileID: 2040451006}
   - component: {fileID: 2040451005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: darkbrown (4)
   m_TagString: floor
   m_Icon: {fileID: 0}

@@ -1891,12 +1891,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainRigidbody: {fileID: 1478147200}
-  futureBody: {fileID: 1997874085}
   mainSpriteRenderer: {fileID: 1478147201}
-  futureSpriteRenderer: {fileID: 1997874086}
   moveSpeed: 7
   jumpSpeed: 12
   cameraMove: {fileID: 222279332}
+  door: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2901,6 +2900,8 @@ GameObject:
   - component: {fileID: 1997874086}
   - component: {fileID: 1997874085}
   - component: {fileID: 1997874084}
+  - component: {fileID: 1997874083}
+  - component: {fileID: 1997874088}
   m_Layer: 0
   m_Name: FuturePlayer
   m_TagString: Untagged
@@ -2908,6 +2909,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1997874083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997874082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5e850fd217e7b41b70ce4f1e4f61b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  futureBody: {fileID: 1997874085}
+  futureSpriteRenderer: {fileID: 1997874086}
+  moveSpeed: 7
+  inPast: 1
+  jumpSpeed: 12
+  door: {fileID: 885672872}
+  newPos: {x: 0, y: 0, z: 0}
+  groundLayer:
+    m_Bits: 8
+  isgrounded: 1
+  onTimeMachine: 0
+  onLever: 0
+  hitLever: 0
+  hitTime: 0
 --- !u!61 &1997874084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3020,3 +3047,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997874088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997874082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3359b5df2e7b61c46bd156e1deba0ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  futureBody: {fileID: 1997874085}
+  futureSpriteRenderer: {fileID: 1997874086}
+  moveSpeed: 7
+  jumpSpeed: 12
+  door: {fileID: 842002952}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
