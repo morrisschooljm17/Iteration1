@@ -7,9 +7,7 @@ public class FuturePlayerController : MonoBehaviour
 
     [SerializeField] private Rigidbody2D futureBody;
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
-
-    [SerializeField] private Transform door;
-    public LayerMask groundLayer;
+    private LeverController leverController;
 
 
     // Start is called before the first frame update
@@ -23,12 +21,12 @@ public class FuturePlayerController : MonoBehaviour
     {
 
     }
-    public bool moveFuturePlayer(Vector2 move, bool hitTime, bool hitLever)
+    public bool moveFuturePlayer(Vector2 move, bool hitTime, bool hitLever, float time)
     {
-        StartCoroutine(MoveFutureSelf(move, hitTime, hitLever));
-        IEnumerator MoveFutureSelf(Vector3 move, bool hitTime, bool hitLever)
+        StartCoroutine(MoveFutureSelf());
+        IEnumerator MoveFutureSelf()
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(time);
             if (move.x < 0)
             {
                 futureSpriteRenderer.flipX = false;
@@ -45,37 +43,27 @@ public class FuturePlayerController : MonoBehaviour
             }
             if (hitLever)
             {
-                door.position += new Vector3(0, 5, 0);
+                leverController.openDoor();
             }
             
         }
         return !hitTime;
     }
-/*    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "TimeMachine")
-        {
-            Debug.Log("Time enter");
-            onTimeMachine = true;
-        }
         if (col.gameObject.tag == "lever")
         {
-            onLever = true;
+            leverController = col.GetComponent<LeverController>();
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "TimeMachine")
-        {
-            Debug.Log("Time leave");
-            onTimeMachine = false;
-        }
         if (col.gameObject.tag == "lever")
         {
-            onLever = false;
+            leverController = null;
         }
-    }*/
+    }
 
 
 }

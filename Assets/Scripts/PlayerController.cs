@@ -5,19 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D mainRigidbody;
-
+    [SerializeField] private BoxCollider2D boxCollider2D;
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
-
     [SerializeField] private float moveSpeed;
-    private bool inPast = true;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private Transform cameraMove;
-    [SerializeField] private Transform door;
     [SerializeField] private FuturePlayerController futurePlayerController;
-    private Vector3 newPos;
+    [SerializeField] private float futurePlayerDelay;
+    private TimeMachine timeMachine;
+    private LeverController leverController;
     public LayerMask groundLayer;
 
-    bool isgrounded = true;
     bool onTimeMachine;
     bool onLever;
     public bool isThereAFuturePlayer;
@@ -34,15 +32,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (inPast == true)
-        {
-            newPos = new Vector3(50, 0, 0);
-        }
-        else
-        {
-            newPos = new Vector3(-50, 0, 0);
-        }
         /*        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
                     mainRigidbody.AddForce(new Vector2(-moveSpeed, 0));
@@ -58,32 +47,32 @@ public class PlayerController : MonoBehaviour
         
         bool IsGrounded()
         {
-            Vector2 position = transform.position;
-            Vector2 direction = Vector2.down;
-            float distance = 1.215f;
+            /*            Vector2 position = transform.position;
+                        Vector2 direction = Vector2.down;
+                        float distance = 1.215f;
 
-            RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-            Debug.Log(hit.distance);
-            if (hit.collider != null)
-            {
-                return true;
-            }
+                        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+                        Debug.Log(hit.distance);
+                        if (hit.collider != null)
+                        {
+                            return true;
+                        }
 
-            return false;
+                        return false;*/
+            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size - new Vector3(.1f, 0, 0), 0f, Vector2.down, .009f, groundLayer);
+            return raycastHit2d.collider != null;
+
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (onTimeMachine)
             {
-                inPast = !inPast;
-                transform.position += newPos;
-                //futurePlayer.position += newPos;
-                cameraMove.position += newPos;
+                timeMachine.timeTravel(transform, cameraMove);
                 hitTime = true;
             }
             else if (onLever)
             {
-                door.position += new Vector3(0, 5, 0);
+                leverController.openDoor();
                 hitLever = true;
             }
         }
@@ -102,13 +91,12 @@ public class PlayerController : MonoBehaviour
         move.x = hor * moveSpeed;
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
-            isgrounded = false;
             move.y = jumpSpeed;
         }
         mainRigidbody.velocity = move;
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever, futurePlayerDelay);
         }
         
 
@@ -117,11 +105,12 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "TimeMachine")
         {
-            Debug.Log("Time enter");
+            timeMachine = col.GetComponent<TimeMachine>();
             onTimeMachine = true;
         }
         if (col.gameObject.tag == "lever")
         {
+            leverController = col.GetComponent<LeverController>();
             onLever = true;
         }
     }
@@ -130,11 +119,12 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "TimeMachine")
         {
-            Debug.Log("Time leave");
+            timeMachine = null;
             onTimeMachine = false;
         }
         if (col.gameObject.tag == "lever")
         {
+            leverController = null;
             onLever = false;
         }
     }
