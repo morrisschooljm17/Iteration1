@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class TimeMachine : MonoBehaviour
 {
-    [SerializeField] private Transform playerMove;
-    [SerializeField] private Transform futurePlayer;
+
     [SerializeField] private Transform cameraMove;
     [SerializeField] private bool inPast;
     private Transform objectMove;

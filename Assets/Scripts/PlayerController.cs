@@ -13,16 +13,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private Transform cameraMove;
     [SerializeField] private Transform door;
+    [SerializeField] private FuturePlayerController futurePlayerController;
     private Vector3 newPos;
     public LayerMask groundLayer;
 
     bool isgrounded = true;
     bool onTimeMachine;
     bool onLever;
+    public bool isThereAFuturePlayer;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
         if (inPast == true)
         {
             newPos = new Vector3(50, 0, 0);
@@ -31,12 +43,6 @@ public class PlayerController : MonoBehaviour
         {
             newPos = new Vector3(-50, 0, 0);
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         /*        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
                     mainRigidbody.AddForce(new Vector2(-moveSpeed, 0));
@@ -47,6 +53,9 @@ public class PlayerController : MonoBehaviour
                     mainRigidbody.AddForce(new Vector2(moveSpeed, 0));
                     mainSpriteRenderer.flipX = true;
                 }*/
+        bool hitTime = false;
+        bool hitLever = false;
+        
         bool IsGrounded()
         {
             Vector2 position = transform.position;
@@ -66,17 +75,17 @@ public class PlayerController : MonoBehaviour
         {
             if (onTimeMachine)
             {
-                inPast = false;
+                inPast = !inPast;
                 transform.position += newPos;
                 //futurePlayer.position += newPos;
                 cameraMove.position += newPos;
+                hitTime = true;
             }
             else if (onLever)
             {
-
                 door.position += new Vector3(0, 5, 0);
+                hitLever = true;
             }
-
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -97,6 +106,11 @@ public class PlayerController : MonoBehaviour
             move.y = jumpSpeed;
         }
         mainRigidbody.velocity = move;
+        if (isThereAFuturePlayer)
+        {
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever);
+        }
+        
 
     }
     private void OnTriggerEnter2D(Collider2D col)
