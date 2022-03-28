@@ -68,6 +68,12 @@ public class PlayerController : MonoBehaviour
             return raycastHit2d.collider != null;
 
         }
+        if (Input.GetKeyDown(KeyCode.R)) {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (onTimeMachine)
