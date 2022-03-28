@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float futurePlayerDelay;
     private TimeMachine timeMachine;
     private LeverController leverController;
+    private LeverandShut leverAndShut;
     public LayerMask groundLayer;
 
     bool onTimeMachine;
     bool onLever;
     bool resetMachine;
+    bool onLeverandShut;
     public bool isThereAFuturePlayer;
 
 
@@ -46,7 +48,8 @@ public class PlayerController : MonoBehaviour
                 }*/
         bool hitTime = false;
         bool hitLever = false;
-        
+        bool hitLeverandShut = false;
+
         bool IsGrounded()
         {
             /*            Vector2 position = transform.position;
@@ -81,6 +84,11 @@ public class PlayerController : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
+            else if (onLeverandShut)
+            {
+                leverAndShut.activate();
+                hitLeverandShut = true;
+            }
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -102,7 +110,7 @@ public class PlayerController : MonoBehaviour
         mainRigidbody.velocity = move;
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever, futurePlayerDelay);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
         }
         
 
@@ -123,6 +131,12 @@ public class PlayerController : MonoBehaviour
         {
             resetMachine = true;
         }
+        if (col.gameObject.tag == "LeverandShut")
+        {
+            leverAndShut = col.GetComponent<LeverandShut>();
+            onLeverandShut = true;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -140,6 +154,11 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "ResetMachine")
         {
             resetMachine = false;
+        }
+        if (col.gameObject.tag == "LeverandShut")
+        {
+            leverAndShut = null;
+            onLeverandShut = false;
         }
     }
 

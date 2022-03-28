@@ -9,6 +9,7 @@ TagManager:
   - door
   - lever
   - ResetMachine
+  - LeverandShut
   layers:
   - Default
   - TransparentFX
