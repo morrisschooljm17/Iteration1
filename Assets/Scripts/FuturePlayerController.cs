@@ -36,7 +36,7 @@ public class FuturePlayerController : MonoBehaviour
             {
                 futureSpriteRenderer.flipX = true;
             }
-            futureBody.velocity = move;
+
 
             if (hitTime)
             {
@@ -50,6 +50,7 @@ public class FuturePlayerController : MonoBehaviour
             {
                 leverAndShutController.activate();
             }
+            futureBody.velocity = move;
 
         }
         return !hitTime;
