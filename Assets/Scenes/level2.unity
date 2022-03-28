@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -509,7 +509,7 @@ Transform:
   - {fileID: 320519996}
   - {fileID: 1946519694}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &290683260
 GameObject:
@@ -2631,6 +2631,10 @@ PrefabInstance:
     - target: {fileID: 320581644641779506, guid: b82800a153a5fcb4f839d5b4c6350588, type: 3}
       propertyPath: m_Name
       value: musicSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 320581644641779506, guid: b82800a153a5fcb4f839d5b4c6350588, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b82800a153a5fcb4f839d5b4c6350588, type: 3}

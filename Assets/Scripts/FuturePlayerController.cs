@@ -22,17 +22,17 @@ public class FuturePlayerController : MonoBehaviour
     {
 
     }
-    public bool moveFuturePlayer(Vector2 move, bool hitTime, bool hitLever, bool hitLevernadShut, float time)
+    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
         {
             yield return new WaitForSeconds(time);
-            if (move.x < 0)
+            if (direction.x < 0)
             {
                 futureSpriteRenderer.flipX = false;
             }
-            else if (move.x > 0)
+            else if (direction.x > 0)
             {
                 futureSpriteRenderer.flipX = true;
             }
@@ -50,7 +50,7 @@ public class FuturePlayerController : MonoBehaviour
             {
                 leverAndShutController.activate();
             }
-            futureBody.velocity = move;
+            futureBody.position = move + new Vector2(50, 0);
 
         }
         return !hitTime;

@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 move = mainRigidbody.velocity;
-        float hor = Input.GetAxisRaw("Horizontal");
+        float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
         {
             mainSpriteRenderer.flipX = false;
@@ -102,17 +102,17 @@ public class PlayerController : MonoBehaviour
             mainSpriteRenderer.flipX = true;
         }
 
-        //move.x = hor * moveSpeed;
+        move.x = hor * moveSpeed;
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
             move.y = jumpSpeed;
-            //mainRigidbody.velocity = move;
+
         }
-        //mainRigidbody.velocity = move;
-        mainRigidbody.AddForce(new Vector2(moveSpeed*hor, 0), ForceMode2D.Force);
+        mainRigidbody.velocity = move;
+        
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
         }
         
 
