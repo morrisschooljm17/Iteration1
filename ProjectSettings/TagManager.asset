@@ -8,6 +8,7 @@ TagManager:
   - TimeMachine
   - door
   - lever
+  - ResetMachine
   layers:
   - Default
   - TransparentFX

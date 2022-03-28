@@ -13,7 +13,7 @@ public class TimeMachine : MonoBehaviour
 
     private void Start()
     {
-        otherTimeMachinePosistion = otherTimeMachine.position + new Vector3(0, 1f, 0);
+        otherTimeMachinePosistion = otherTimeMachine.position + new Vector3(0, 0, 0);
 
     }
     public void timeTravel(Transform player, Transform camera)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     bool onTimeMachine;
     bool onLever;
+    bool resetMachine;
     public bool isThereAFuturePlayer;
 
 
@@ -75,6 +77,10 @@ public class PlayerController : MonoBehaviour
                 leverController.openDoor();
                 hitLever = true;
             }
+            else if (resetMachine)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -113,6 +119,10 @@ public class PlayerController : MonoBehaviour
             leverController = col.GetComponent<LeverController>();
             onLever = true;
         }
+        if (col.gameObject.tag == "ResetMachine")
+        {
+            resetMachine = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -126,6 +136,10 @@ public class PlayerController : MonoBehaviour
         {
             leverController = null;
             onLever = false;
+        }
+        if (col.gameObject.tag == "ResetMachine")
+        {
+            resetMachine = false;
         }
     }
 
