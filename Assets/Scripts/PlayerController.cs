@@ -68,12 +68,6 @@ public class PlayerController : MonoBehaviour
             return raycastHit2d.collider != null;
 
         }
-        if (Input.GetKeyDown(KeyCode.R)) {
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        }
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (onTimeMachine)
@@ -98,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 move = mainRigidbody.velocity;
-        float hor = Input.GetAxis("Horizontal");
+        float hor = Input.GetAxisRaw("Horizontal");
         if (hor < 0)
         {
             mainSpriteRenderer.flipX = false;
@@ -108,12 +102,14 @@ public class PlayerController : MonoBehaviour
             mainSpriteRenderer.flipX = true;
         }
 
-        move.x = hor * moveSpeed;
+        //move.x = hor * moveSpeed;
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
             move.y = jumpSpeed;
+            //mainRigidbody.velocity = move;
         }
-        mainRigidbody.velocity = move;
+        //mainRigidbody.velocity = move;
+        mainRigidbody.AddForce(new Vector2(moveSpeed*hor, 0), ForceMode2D.Force);
         if (isThereAFuturePlayer)
         {
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
