@@ -10,6 +10,7 @@ TagManager:
   - lever
   - ResetMachine
   - LeverandShut
+  - Destroyable Object
   layers:
   - Default
   - TransparentFX
