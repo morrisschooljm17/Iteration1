@@ -522,7 +522,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 5, y: 5}
-    newSize: {x: 9.6, y: 47.4}
+    newSize: {x: 9.6, y: 38.40243}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
@@ -575,7 +575,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 9.6, y: 47.4}
+  m_Size: {x: 9.6, y: 38.40243}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -589,7 +589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258140561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.54, y: 0.52, z: 0}
+  m_LocalPosition: {x: -9.65569, y: 0.073, z: -0.0033025742}
   m_LocalScale: {x: 0.09999999, y: 0.099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 258140565}
   xAxis: 0
-  yAxis: 2.4
+  yAxis: 3.269211
   speed: 2
   timedDoor: 1
   doorCloseTimer: 3.5
@@ -3132,7 +3132,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 812c474e8be9259418b3ed23c92e62c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
