@@ -2401,7 +2401,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 812c474e8be9259418b3ed23c92e62c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3525,8 +3525,8 @@ GameObject:
   - component: {fileID: 1824614744}
   - component: {fileID: 1824614743}
   - component: {fileID: 1824614742}
-  - component: {fileID: 1824614741}
   - component: {fileID: 1824614745}
+  - component: {fileID: 1824614741}
   m_Layer: 3
   m_Name: DestroyFloor
   m_TagString: floor
@@ -3557,9 +3557,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824614739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea70ce7fdfdadc468aa0fc66ec55b62, type: 3}
+  m_Script: {fileID: 11500000, guid: 79e762339a77c2343ac189f4e0407804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidBody: {fileID: 1824614745}
 --- !u!251 &1824614742
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -3813,7 +3814,7 @@ GameObject:
   - component: {fileID: 1946528245}
   m_Layer: 3
   m_Name: darkbrown (2)
-  m_TagString: floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
