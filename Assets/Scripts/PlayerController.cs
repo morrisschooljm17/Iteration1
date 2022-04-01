@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
                         }
 
                         return false;*/
-            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size - new Vector3(.1f, 0, 0), 0f, Vector2.down, .009f, groundLayer);
+            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size - new Vector3(0, 0, 0), 0f, Vector2.down, .01f, groundLayer);
             return raycastHit2d.collider != null;
 
         }
