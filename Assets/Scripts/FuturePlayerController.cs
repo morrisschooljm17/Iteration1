@@ -9,6 +9,7 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     private LeverController leverController;
     private LeverandShut leverAndShutController;
+    private ElevatorController elevatorController;
 
 
     // Start is called before the first frame update
@@ -22,7 +23,7 @@ public class FuturePlayerController : MonoBehaviour
     {
 
     }
-    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, float time)
+    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut,bool elevator, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -50,6 +51,10 @@ public class FuturePlayerController : MonoBehaviour
             {
                 leverAndShutController.activate();
             }
+            if (elevator)
+            {
+                elevatorController.openDoor();
+            }
             futureBody.position = move + new Vector2(50, 0);
 
         }
@@ -65,6 +70,10 @@ public class FuturePlayerController : MonoBehaviour
         {
             leverAndShutController = col.GetComponent<LeverandShut>();
         }
+        if (col.gameObject.tag == "Elevator")
+        {
+            elevatorController = col.GetComponent<ElevatorController>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -76,6 +85,10 @@ public class FuturePlayerController : MonoBehaviour
         if (col.gameObject.tag == "LeverandShut")
         {
             leverAndShutController = null;
+        }
+        if (col.gameObject.tag == "Elevator")
+        {
+            elevatorController = null;
         }
     }
 

@@ -11,6 +11,7 @@ TagManager:
   - ResetMachine
   - LeverandShut
   - Destroyable Object
+  - Elevator
   layers:
   - Default
   - TransparentFX

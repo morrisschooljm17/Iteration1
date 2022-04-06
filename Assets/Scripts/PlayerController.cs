@@ -13,15 +13,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform cameraMove;
     [SerializeField] private FuturePlayerController futurePlayerController;
     [SerializeField] private float futurePlayerDelay;
+    [SerializeField] private GameObject pressE;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
+    private ElevatorController elevator;
     public LayerMask groundLayer;
 
     bool onTimeMachine;
     bool onLever;
     bool resetMachine;
     bool onLeverandShut;
+    bool onElevator;
     public bool isThereAFuturePlayer;
 
 
@@ -49,6 +52,8 @@ public class PlayerController : MonoBehaviour
         bool hitTime = false;
         bool hitLever = false;
         bool hitLeverandShut = false;
+        bool hitElevator = false;
+
 
         bool IsGrounded()
         {
@@ -64,7 +69,7 @@ public class PlayerController : MonoBehaviour
                         }
 
                         return false;*/
-            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size - new Vector3(0, 0, 0), 0f, Vector2.down, .01f, groundLayer);
+            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .01f, groundLayer);
             return raycastHit2d.collider != null;
 
         }
@@ -89,6 +94,11 @@ public class PlayerController : MonoBehaviour
                 leverAndShut.activate();
                 hitLeverandShut = true;
             }
+            else if (onElevator)
+            {
+                elevator.openDoor();
+                hitElevator = true;
+            }
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -112,7 +122,7 @@ public class PlayerController : MonoBehaviour
         
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, futurePlayerDelay);
         }
         
 
@@ -123,6 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             timeMachine = col.GetComponent<TimeMachine>();
             onTimeMachine = true;
+            pressE.SetActive(true);
         }
         if (col.gameObject.tag == "lever")
         {
@@ -138,6 +149,11 @@ public class PlayerController : MonoBehaviour
             leverAndShut = col.GetComponent<LeverandShut>();
             onLeverandShut = true;
         }
+        if (col.gameObject.tag == "Elevator")
+        {
+            elevator = col.GetComponent<ElevatorController>();
+            onElevator = true;
+        }
 
     }
 
@@ -147,6 +163,7 @@ public class PlayerController : MonoBehaviour
         {
             timeMachine = null;
             onTimeMachine = false;
+            pressE.SetActive(false);
         }
         if (col.gameObject.tag == "lever")
         {
@@ -161,6 +178,11 @@ public class PlayerController : MonoBehaviour
         {
             leverAndShut = null;
             onLeverandShut = false;
+        }
+        if (col.gameObject.tag == "Elevator")
+        {
+            elevator = null;
+            onElevator = false;
         }
     }
 
