@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private LeverandShut leverAndShut;
     public LayerMask groundLayer;
     private string sceneName;
+    private bool inPresent;
 
     bool onTimeMachine;
     bool onLever;
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        inPresent = true;
         Scene currentScene = SceneManager.GetActiveScene();
 
         // Retrieve the name of this scene.
@@ -80,16 +81,29 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) 
         {
 
-            if (sceneName == "fallinglevel") {
+            if (sceneName == "fallinglevel" && inPresent) {
 
-                Debug.Log(sceneName);
+                Debug.Log("work");
+                
+                transform.position += new Vector3(40, 0, 0);
+                cameraMove.position += new Vector3(40, 0, 0);
+                inPresent = false;
+                
+                
+            }
 
-                transform.position += new Vector3(50, 0, 0);
-                cameraMove.position += new Vector3(50, 0, 0);
+            else if (sceneName == "fallinglevel" && !inPresent)
+            {
+
+                
+
+                transform.position += new Vector3(-40, 0, 0);
+                cameraMove.position += new Vector3(-40, 0, 0);
+                inPresent = true;
 
 
             }
-        
+
         }
 
 
