@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (onElevator)
             {
-                elevator.openDoor();
+                elevator.startElevator();
                 hitElevator = true;
             }
         }

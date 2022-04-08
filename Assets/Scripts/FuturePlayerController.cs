@@ -53,7 +53,7 @@ public class FuturePlayerController : MonoBehaviour
             }
             if (elevator)
             {
-                elevatorController.openDoor();
+                elevatorController.startElevator();
             }
             futureBody.position = move + new Vector2(50, 0);
 
