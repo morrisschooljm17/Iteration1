@@ -15,34 +15,31 @@ public class Elevator : MonoBehaviour
     private Vector3 newPos;
     private Vector3 oldPos;
 
-
-
     private void Start()
     {
         newPos = transform.position + new Vector3(xAxis, yAxis, 0);
         oldPos = transform.position;
     }
-    public void openDoor()
+    private void Update()
     {
-        if (up)
+        if (doorOpen)
         {
-            up = !up;
-            StopAllCoroutines();
-            StartCoroutine(SmoothTranslation(oldPos, speed));
+            transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
+            //transform.Translate(newPos * speed * Time.deltaTime);
         }
         else
         {
-            up = !up;
-            StopAllCoroutines();
-            StartCoroutine(SmoothTranslation(newPos, speed));
-            if (timedDoor)
-            {
-                StartCoroutine(TimedDoorShut(doorCloseTimer));
-            }
+            transform.position = Vector3.MoveTowards(transform.position, oldPos, speed * Time.deltaTime);
+            //transform.Translate(oldPos * speed * Time.deltaTime);
         }
-        doorOpen = !doorOpen;
     }
-    IEnumerator TimedDoorShut(float time)
+
+
+    public void openDoor()
+    {
+        doorOpen =! doorOpen;
+    }
+    /*IEnumerator TimedDoorShut(float time)
     {
         yield return new WaitForSeconds(time);
         openDoor();
@@ -58,6 +55,6 @@ public class Elevator : MonoBehaviour
             yield return null;
         }
 
-    }
+    }*/
 
 }

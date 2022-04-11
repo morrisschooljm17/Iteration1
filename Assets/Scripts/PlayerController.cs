@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform cameraMove;
     [SerializeField] private FuturePlayerController futurePlayerController;
     [SerializeField] private float futurePlayerDelay;
-    [SerializeField] private GameObject pressE;
+    //[SerializeField] private GameObject pressE;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             timeMachine = col.GetComponent<TimeMachine>();
             onTimeMachine = true;
-            pressE.SetActive(true);
+            //pressE.SetActive(true);
         }
         if (col.gameObject.tag == "lever")
         {
@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
         {
             timeMachine = null;
             onTimeMachine = false;
-            pressE.SetActive(false);
+            //pressE.SetActive(false);
         }
         if (col.gameObject.tag == "lever")
         {
