@@ -21,13 +21,13 @@ public class TimeMachine : MonoBehaviour
         if (inPast)
         {
             player.position = otherTimeMachinePosistion;
-            camera.position += new Vector3(50, 0, 0);
+            camera.position += new Vector3(30, 0, 0);
             
         }
         else
         {
             player.position = otherTimeMachinePosistion;
-            camera.position += new Vector3(-50, 0, 0);
+            camera.position += new Vector3(-30, 0, 0);
         }
 
     }

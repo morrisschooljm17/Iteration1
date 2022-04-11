@@ -85,8 +85,8 @@ public class PlayerController : MonoBehaviour
 
                 Debug.Log("work");
                 
-                transform.position += new Vector3(40, 0, 0);
-                cameraMove.position += new Vector3(40, 0, 0);
+                transform.position += new Vector3(48, 0, 0);
+                cameraMove.position += new Vector3(48, 0, 0);
                 inPresent = false;
                 
                 
@@ -97,8 +97,8 @@ public class PlayerController : MonoBehaviour
 
                 
 
-                transform.position += new Vector3(-40, 0, 0);
-                cameraMove.position += new Vector3(-40, 0, 0);
+                transform.position += new Vector3(-48, 0, 0);
+                cameraMove.position += new Vector3(-48, 0, 0);
                 inPresent = true;
 
 
