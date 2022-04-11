@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 public class KillPlane : MonoBehaviour
 {
 
-    void OnCollisionEnter2d(Collision otherObj)
+    void OnTriggerEnter2D(Collider2D otherObj)
     {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
+        if (otherObj.gameObject.tag == "Player")
+        {
+            Debug.Log("collided");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
         
     }
 }

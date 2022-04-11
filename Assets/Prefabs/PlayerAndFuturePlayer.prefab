@@ -241,7 +241,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 3700578646614774036}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  isThereAFuturePlayer: 1
+  isThereAFuturePlayer: 0
 --- !u!1 &8867361644589601212
 GameObject:
   m_ObjectHideFlags: 0
