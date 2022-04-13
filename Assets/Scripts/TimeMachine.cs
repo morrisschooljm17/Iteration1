@@ -16,18 +16,18 @@ public class TimeMachine : MonoBehaviour
         otherTimeMachinePosistion = otherTimeMachine.position + new Vector3(0, 0, 0);
 
     }
-    public void timeTravel(Transform player, Transform camera)
+    public void timeTravel(Transform player, Camera camera)
     {
         if (inPast)
         {
             player.position = otherTimeMachinePosistion;
-            camera.position += new Vector3(50, 0, 0);
+            camera.transform.position += new Vector3(50, 0, 0);
             
         }
         else
         {
             player.position = otherTimeMachinePosistion;
-            camera.position += new Vector3(-50, 0, 0);
+            camera.transform.position += new Vector3(-50, 0, 0);
         }
 
     }

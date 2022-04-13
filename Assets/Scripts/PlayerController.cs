@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,20 +11,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private Transform cameraMove;
+    [SerializeField] private Camera cameraMove;
     [SerializeField] private FuturePlayerController futurePlayerController;
     [SerializeField] private float futurePlayerDelay;
+    [SerializeField] private Animator playerAnimator;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
     public LayerMask groundLayer;
 
-    bool onTimeMachine;
-    bool onLever;
-    bool resetMachine;
-    bool onLeverandShut;
+    bool onTimeMachine = false;
+    bool onLever = false;
+    bool resetMachine = false;
+    bool onLeverandShut = false;
     public bool isThereAFuturePlayer;
 
+    const String playerRun = "playerRunning";
+    const String playerIdle = "Idle";
+    const String playerRunOnButton = "PlayerRunOnButton";
+    const String playerIdleOnButton = "PlayerIdleButton";
 
 
     // Start is called before the first frame update
@@ -95,11 +101,11 @@ public class PlayerController : MonoBehaviour
         float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
         {
-            mainSpriteRenderer.flipX = false;
+            mainSpriteRenderer.flipX = true;
         }
         else if (hor > 0)
         {
-            mainSpriteRenderer.flipX = true;
+            mainSpriteRenderer.flipX = false;
         }
 
         move.x = hor * moveSpeed;
@@ -108,15 +114,38 @@ public class PlayerController : MonoBehaviour
             move.y = jumpSpeed;
 
         }
+        if(Math.Abs(move.x) >= .3){
+            handleAnimation(playerRun);
+        }
+        else{
+            handleAnimation(playerIdle);
+        }
         mainRigidbody.velocity = move;
         
         if (isThereAFuturePlayer)
         {
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
         }
-        
-
     }
+    private void handleAnimation(String anim){
+        if(Equals(anim, playerRun)){
+            if(onLever || onLeverandShut || onTimeMachine){
+                playerAnimator.Play(playerRunOnButton);
+            }
+            else{
+                playerAnimator.Play(playerRun);
+            }
+        }
+        else if(Equals(anim, playerIdle)){
+            if(onLever || onLeverandShut || onTimeMachine){
+                playerAnimator.Play(playerIdleOnButton);
+            }
+            else{
+                playerAnimator.Play(playerIdle);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "TimeMachine")
