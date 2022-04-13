@@ -84,8 +84,8 @@ public class PlayerController : MonoBehaviour
             if (sceneName == "level7" && inPresent) {
 
                 
-                transform.position += new Vector3(48, 0, 0);
-                cameraMove.position += new Vector3(48, 0, 0);
+                transform.position += new Vector3(50, 0, 0);
+                cameraMove.position += new Vector3(50, 0, 0);
                 inPresent = false;
                 
                 
@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
 
                 
 
-                transform.position += new Vector3(-48, 0, 0);
-                cameraMove.position += new Vector3(-48, 0, 0);
+                transform.position += new Vector3(-50, 0, 0);
+                cameraMove.position += new Vector3(-50, 0, 0);
                 inPresent = true;
 
 
