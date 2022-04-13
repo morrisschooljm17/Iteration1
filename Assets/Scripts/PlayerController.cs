@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) 
         {
 
-            if (sceneName == "fallinglevel" && inPresent) {
+            if (sceneName == "level7" && inPresent) {
 
                 
                 transform.position += new Vector3(48, 0, 0);
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
                 
             }
 
-            else if (sceneName == "fallinglevel" && !inPresent)
+            else if (sceneName == "level7" && !inPresent)
             {
 
                 
