@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
 
             if (sceneName == "fallinglevel" && inPresent) {
 
-                Debug.Log("work");
                 
                 transform.position += new Vector3(48, 0, 0);
                 cameraMove.position += new Vector3(48, 0, 0);
