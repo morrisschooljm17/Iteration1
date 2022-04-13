@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             if (onTimeMachine)
             {
-                timeMachine.timeTravel(transform, cameraMove);
+                timeMachine.timeTravel(mainRigidbody, cameraMove);
                 hitTime = true;
             }
             else if (onLever)
