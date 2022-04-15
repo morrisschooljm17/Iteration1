@@ -938,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4649530450291963683, guid: 23b8c306109b785469e337661f8ec5cf, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4649530450291963868, guid: 23b8c306109b785469e337661f8ec5cf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6334,7 +6338,7 @@ MonoBehaviour:
   door: {fileID: 1410237986}
   xAxis: 14.33
   yAxis: 0
-  speed: 500
+  speed: 650
   timedDoor: 1
   doorCloseTimer: 10
 --- !u!1 &1539273338
