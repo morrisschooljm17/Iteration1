@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FailCondition : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class FailCondition : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        failPrompt.SetActive(true);
-        nextLevelDoor.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
