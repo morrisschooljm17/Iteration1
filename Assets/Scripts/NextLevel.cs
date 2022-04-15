@@ -22,7 +22,7 @@ public class NextLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && lever && nextLevelName == "level6")
+        if (Input.GetKeyDown(KeyCode.E) && lever && nextLevelName == "level8")
         {
             SceneManager.LoadScene("MainMenu");
         }

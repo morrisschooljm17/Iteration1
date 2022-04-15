@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private LeverController leverController;
     private LeverandShut leverAndShut;
     public LayerMask groundLayer;
+    private string sceneName;
+    private bool inPresent;
 
     bool onTimeMachine = false;
     bool onLever = false;
@@ -35,6 +37,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inPresent = true;
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Retrieve the name of this scene.
+        sceneName = currentScene.name;
+
+        Debug.Log(sceneName);
 
 
     }
@@ -74,6 +83,35 @@ public class PlayerController : MonoBehaviour
             return raycastHit2d.collider != null;
 
         }
+
+        if (Input.GetKeyDown(KeyCode.Z)) 
+        {
+
+            if (sceneName == "level7" && inPresent) {
+
+                
+                transform.position += new Vector3(50, 0, 0);
+                cameraMove.position += new Vector3(50, 0, 0);
+                inPresent = false;
+                
+                
+            }
+
+            else if (sceneName == "level7" && !inPresent)
+            {
+
+                
+
+                transform.position += new Vector3(-50, 0, 0);
+                cameraMove.position += new Vector3(-50, 0, 0);
+                inPresent = true;
+
+
+            }
+
+        }
+
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (onTimeMachine)
