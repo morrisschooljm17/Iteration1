@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 7463492409461092086}
   - component: {fileID: 7463492409461092081}
   - component: {fileID: 7463492409461092080}
+  - component: {fileID: 8925043061424319178}
   m_Layer: 0
   m_Name: TimeMachine1
   m_TagString: TimeMachine
@@ -265,3 +266,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0487945, y: 4.1433563}
   m_EdgeRadius: 0
+--- !u!114 &8925043061424319178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7463492409461092083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a660473f1fee12744a6fcdec8905e8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherTimeMachine: {fileID: 7463492409187912097}
+  inPast: 1
