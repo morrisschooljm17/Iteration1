@@ -50,7 +50,8 @@ public class FuturePlayerController : MonoBehaviour
 
             if (hitTime)
             {
-                Destroy(transform.gameObject);
+                StartCoroutine(SpinPlayer(futureBody));
+                
             }
             if (hitLever)
             {
@@ -70,6 +71,23 @@ public class FuturePlayerController : MonoBehaviour
 
         }
         return !hitTime;
+    }
+        IEnumerator SpinPlayer(Rigidbody2D player)
+    {
+        Vector3 local = player.transform.localScale;
+        Vector3 position = player.transform.position;
+
+        for (int i = 0; i < 50; i++)
+        {
+
+                player.transform.localScale += new Vector3(-.1f, -.1f, 0);
+                player.transform.position = position;
+
+
+            player.transform.Rotate(Vector3.forward * -45);
+            yield return new WaitForSeconds(.01f);
+        }
+        Destroy(transform.gameObject);
     }
 
         private void handleAnimation(String anim){

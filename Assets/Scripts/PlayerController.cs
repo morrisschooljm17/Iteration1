@@ -81,36 +81,25 @@ public class PlayerController : MonoBehaviour
                         return false;*/
             RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .02f, groundLayer);
             return raycastHit2d.collider != null;
-
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) 
         {
 
-            if (sceneName == "level7" && inPresent) {
-
-                
+            if (sceneName == "level7" && inPresent) {                
                 transform.position += new Vector3(50, 0, 0);
                 cameraMove.transform.position += new Vector3(50, 0, 0);
-                inPresent = false;
-                
-                
+                inPresent = false;                               
             }
 
             else if (sceneName == "level7" && !inPresent)
-            {
-
-                
-
+            {               
                 transform.position += new Vector3(-50, 0, 0);
                 cameraMove.transform.position += new Vector3(-50, 0, 0);
                 inPresent = true;
-
-
             }
 
         }
-
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -126,7 +115,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (resetMachine)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                StartCoroutine(SpinPlayer(mainRigidbody));
+
             }
             else if (onLeverandShut)
             {
@@ -165,6 +155,25 @@ public class PlayerController : MonoBehaviour
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
         }
     }
+
+    IEnumerator SpinPlayer(Rigidbody2D player)
+    {
+        Vector3 local = player.transform.localScale;
+        Vector3 position = player.transform.position;
+
+        for (int i = 0; i < 50; i++)
+        {
+
+                player.transform.localScale += new Vector3(-.1f, -.1f, 0);
+                player.transform.position = position;
+
+
+            player.transform.Rotate(Vector3.forward * -45);
+            yield return new WaitForSeconds(.01f);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
             if(onLever || onLeverandShut || onTimeMachine){
