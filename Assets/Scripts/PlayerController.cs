@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private Transform cameraMove;
+    [SerializeField] private Camera cameraMove;
     [SerializeField] private FuturePlayerController futurePlayerController;
     [SerializeField] private float futurePlayerDelay;
+    [SerializeField] private Animator playerAnimator;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
@@ -20,12 +22,16 @@ public class PlayerController : MonoBehaviour
     private string sceneName;
     private bool inPresent;
 
-    bool onTimeMachine;
-    bool onLever;
-    bool resetMachine;
-    bool onLeverandShut;
+    bool onTimeMachine = false;
+    bool onLever = false;
+    bool resetMachine = false;
+    bool onLeverandShut = false;
     public bool isThereAFuturePlayer;
 
+    const String playerRun = "playerRunning";
+    const String playerIdle = "Idle";
+    const String playerRunOnButton = "PlayerRunOnButton";
+    const String playerIdleOnButton = "PlayerIdleButton";
 
 
     // Start is called before the first frame update
@@ -73,44 +79,33 @@ public class PlayerController : MonoBehaviour
                         }
 
                         return false;*/
-            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size - new Vector3(0, 0, 0), 0f, Vector2.down, .01f, groundLayer);
+            RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .02f, groundLayer);
             return raycastHit2d.collider != null;
-
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) 
         {
 
-            if (sceneName == "level7" && inPresent) {
-
-                
+            if (sceneName == "level7" && inPresent) {                
                 transform.position += new Vector3(50, 0, 0);
-                cameraMove.position += new Vector3(50, 0, 0);
-                inPresent = false;
-                
-                
+                cameraMove.transform.position += new Vector3(50, 0, 0);
+                inPresent = false;                               
             }
 
             else if (sceneName == "level7" && !inPresent)
-            {
-
-                
-
+            {               
                 transform.position += new Vector3(-50, 0, 0);
-                cameraMove.position += new Vector3(-50, 0, 0);
+                cameraMove.transform.position += new Vector3(-50, 0, 0);
                 inPresent = true;
-
-
             }
 
         }
-
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (onTimeMachine)
             {
-                timeMachine.timeTravel(transform, cameraMove);
+                timeMachine.timeTravel(mainRigidbody, cameraMove);
                 hitTime = true;
             }
             else if (onLever)
@@ -120,7 +115,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (resetMachine)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                StartCoroutine(SpinPlayer(mainRigidbody));
+
             }
             else if (onLeverandShut)
             {
@@ -133,11 +129,11 @@ public class PlayerController : MonoBehaviour
         float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
         {
-            mainSpriteRenderer.flipX = false;
+            mainSpriteRenderer.flipX = true;
         }
         else if (hor > 0)
         {
-            mainSpriteRenderer.flipX = true;
+            mainSpriteRenderer.flipX = false;
         }
 
         move.x = hor * moveSpeed;
@@ -146,15 +142,57 @@ public class PlayerController : MonoBehaviour
             move.y = jumpSpeed;
 
         }
+        if(Math.Abs(move.x) >= .3){
+            handleAnimation(playerRun);
+        }
+        else{
+            handleAnimation(playerIdle);
+        }
         mainRigidbody.velocity = move;
         
         if (isThereAFuturePlayer)
         {
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
         }
-        
-
     }
+
+    IEnumerator SpinPlayer(Rigidbody2D player)
+    {
+        Vector3 local = player.transform.localScale;
+        Vector3 position = player.transform.position;
+
+        for (int i = 0; i < 50; i++)
+        {
+
+                player.transform.localScale += new Vector3(-.1f, -.1f, 0);
+                player.transform.position = position;
+
+
+            player.transform.Rotate(Vector3.forward * -45);
+            yield return new WaitForSeconds(.01f);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    private void handleAnimation(String anim){
+        if(Equals(anim, playerRun)){
+            if(onLever || onLeverandShut || onTimeMachine){
+                playerAnimator.Play(playerRunOnButton);
+            }
+            else{
+                playerAnimator.Play(playerRun);
+            }
+        }
+        else if(Equals(anim, playerIdle)){
+            if(onLever || onLeverandShut || onTimeMachine){
+                playerAnimator.Play(playerIdleOnButton);
+            }
+            else{
+                playerAnimator.Play(playerIdle);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "TimeMachine")

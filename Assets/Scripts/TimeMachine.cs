@@ -9,28 +9,56 @@ public class TimeMachine : MonoBehaviour
     public bool inPast;
 
     private Vector3 otherTimeMachinePosistion;
-    private Vector3 secondPos;
+
+    Vector3 cameraPosNew;
 
     private void Start()
     {
         otherTimeMachinePosistion = otherTimeMachine.position + new Vector3(0, 0, 0);
 
     }
-    public void timeTravel(Transform player, Transform camera)
+    public void timeTravel(Rigidbody2D player, Camera camera)
     {
+
         if (inPast)
         {
-            player.position = otherTimeMachinePosistion;
-            camera.position += new Vector3(50, 0, 0);
-            
+            cameraPosNew = camera.transform.position + new Vector3(50, 0, 0);
         }
         else
         {
-            player.position = otherTimeMachinePosistion;
-            camera.position += new Vector3(-50, 0, 0);
+            cameraPosNew = camera.transform.position + new Vector3(-50, 0, 0);
         }
-
+        StartCoroutine(SpinPlayer(player, camera));
     }
+
+    IEnumerator SpinPlayer(Rigidbody2D player, Camera camera)
+    {
+        Vector3 local = player.transform.localScale;
+        Vector3 position = player.transform.position;
+
+        for (int i = 0; i < 100; i++)
+        {
+            if (i < 49)
+            {
+                player.transform.localScale += new Vector3(-.1f, -.1f, 0);
+                player.transform.position = position;
+            }
+            else
+            {
+                player.transform.localScale += new Vector3(.1f, .1f, 0);
+                player.transform.position = otherTimeMachinePosistion;
+                camera.transform.position = cameraPosNew;
+            }
+
+            player.transform.Rotate(Vector3.forward * -45);
+            yield return new WaitForSeconds(.01f);
+        }
+        player.transform.localScale = local;
+        player.transform.rotation = Quaternion.identity;
+        player.transform.position = otherTimeMachinePosistion;
+        yield return null;
+    }
+
 /*    void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("Trigger");
