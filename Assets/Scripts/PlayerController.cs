@@ -86,13 +86,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) 
         {
 
-            if (sceneName == "level7" && inPresent) {                
+            if (sceneName == "level4" && inPresent) {                
                 transform.position += new Vector3(50, 0, 0);
                 cameraMove.transform.position += new Vector3(50, 0, 0);
                 inPresent = false;                               
             }
 
-            else if (sceneName == "level7" && !inPresent)
+            else if (sceneName == "level4" && !inPresent)
             {               
                 transform.position += new Vector3(-50, 0, 0);
                 cameraMove.transform.position += new Vector3(-50, 0, 0);
