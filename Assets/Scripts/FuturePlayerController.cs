@@ -9,8 +9,10 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D futureBody;
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private BoxCollider2D boxCollider2D;
     private LeverController leverController;
     private LeverandShut leverAndShutController;
+    public LayerMask dramaLayer;
 
     const String playerRun = "playerRunning";
     const String playerIdle = "Idle";
@@ -21,6 +23,7 @@ public class FuturePlayerController : MonoBehaviour
     bool onLeverandShut = false;
     bool onTimeMachine = false;
     bool onResetMachine = false;
+    bool playerDirectionRight = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +33,28 @@ public class FuturePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool pastDrama()
+        {
+            if (playerDirectionRight)
+            {
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.right, 5f, dramaLayer);
+                return raycastHit2d.collider != null;
+            }
+            else
+            {
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.left, 5f, dramaLayer);
+                return raycastHit2d.collider != null;
+            }
 
+        }
+        if (pastDrama())
+        {
+            Debug.Log("See the drama");
+        }
+        else
+        {
+            Debug.Log("Dont see any drama");
+        }
     }
     public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, float time)
     {
@@ -41,10 +65,12 @@ public class FuturePlayerController : MonoBehaviour
             if (direction.x < 0)
             {
                 futureSpriteRenderer.flipX = true;
+                playerDirectionRight = false;
             }
             else if (direction.x > 0)
             {
                 futureSpriteRenderer.flipX = false;
+                playerDirectionRight = true;
             }
 
 

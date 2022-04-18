@@ -43,9 +43,6 @@ public class PlayerController : MonoBehaviour
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
 
-        Debug.Log(sceneName);
-
-
     }
 
     // Update is called once per frame
