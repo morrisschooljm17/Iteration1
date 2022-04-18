@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class FuturePlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D boxCollider2D;
+    
     private LeverController leverController;
     private LeverandShut leverAndShutController;
     public LayerMask dramaLayer;
@@ -27,6 +29,7 @@ public class FuturePlayerController : MonoBehaviour
 
     bool m_HitDetect;
     RaycastHit m_Hit;
+    Vector3 colliderSize= new Vector3(0,15,0);
     // Start is called before the first frame update
     void Start()
     {
@@ -40,38 +43,32 @@ public class FuturePlayerController : MonoBehaviour
         {
             if (playerDirectionRight)
             {
-                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.right, 5f);
-                if(raycastHit2d.transform.tag == "drama")
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.right, 20f, dramaLayer);
+                if(raycastHit2d.collider != null && (raycastHit2d.transform.tag == "drama" || raycastHit2d.transform.tag == "Player"))
                 {
                     return true;
                 }
-                else
-                {
+                else{
                     return false;
                 }
             }
             else
             {
-                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.left, 5f);
-                if (raycastHit2d.transform.tag == "drama")
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.left, 20f, dramaLayer);
+                if(raycastHit2d.collider != null && (raycastHit2d.transform.tag == "drama" || raycastHit2d.transform.tag == "Player"))
                 {
                     return true;
                 }
-                else
-                {
+                else{
                     return false;
                 }
             }
-
         }
         if (pastDrama())
         {
-            Debug.Log("See the drama");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        else
-        {
-            Debug.Log("Dont see any drama");
-        }
+
     }
     public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, float time)
     {

@@ -48,34 +48,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                {
-                    mainRigidbody.AddForce(new Vector2(-moveSpeed, 0));
-                    mainSpriteRenderer.flipX = false;
-                }
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                {
-                    mainRigidbody.AddForce(new Vector2(moveSpeed, 0));
-                    mainSpriteRenderer.flipX = true;
-                }*/
+
         bool hitTime = false;
         bool hitLever = false;
         bool hitLeverandShut = false;
 
         bool IsGrounded()
         {
-            /*            Vector2 position = transform.position;
-                        Vector2 direction = Vector2.down;
-                        float distance = 1.215f;
 
-                        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-                        Debug.Log(hit.distance);
-                        if (hit.collider != null)
-                        {
-                            return true;
-                        }
-
-                        return false;*/
             RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .02f, groundLayer);
             return raycastHit2d.collider != null;
         }
