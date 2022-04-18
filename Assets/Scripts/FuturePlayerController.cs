@@ -24,6 +24,9 @@ public class FuturePlayerController : MonoBehaviour
     bool onTimeMachine = false;
     bool onResetMachine = false;
     bool playerDirectionRight = true;
+
+    bool m_HitDetect;
+    RaycastHit m_Hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,13 +40,27 @@ public class FuturePlayerController : MonoBehaviour
         {
             if (playerDirectionRight)
             {
-                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.right, 5f, dramaLayer);
-                return raycastHit2d.collider != null;
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.right, 5f);
+                if(raycastHit2d.transform.tag == "drama")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.left, 5f, dramaLayer);
-                return raycastHit2d.collider != null;
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.left, 5f);
+                if (raycastHit2d.transform.tag == "drama")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
         }
