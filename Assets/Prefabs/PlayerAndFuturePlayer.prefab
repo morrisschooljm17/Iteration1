@@ -161,6 +161,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3642726814630060738, guid: 95f3f694326a9dc40bf4ac1fdcb74bc5, type: 3}
+      propertyPath: boxCollider2D
+      value: 
+      objectReference: {fileID: 4231782387425344074}
+    - target: {fileID: 3642726814630060738, guid: 95f3f694326a9dc40bf4ac1fdcb74bc5, type: 3}
+      propertyPath: dramaLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3642726814630060739, guid: 95f3f694326a9dc40bf4ac1fdcb74bc5, type: 3}
       propertyPath: m_Name
       value: FuturePlayer
@@ -170,6 +178,11 @@ PrefabInstance:
 --- !u!4 &4231782387425344183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642726814630060604, guid: 95f3f694326a9dc40bf4ac1fdcb74bc5, type: 3}
+  m_PrefabInstance: {fileID: 592187161452566667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &4231782387425344074 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3642726814630060737, guid: 95f3f694326a9dc40bf4ac1fdcb74bc5, type: 3}
   m_PrefabInstance: {fileID: 592187161452566667}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4231782387425344073 stripped

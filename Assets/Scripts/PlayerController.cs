@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
+    private SmoothDoorController elevator;
     public LayerMask groundLayer;
     private string sceneName;
     private bool inPresent;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool onLever = false;
     bool resetMachine = false;
     bool onLeverandShut = false;
+    bool onElevator = false;
     public bool isThereAFuturePlayer;
 
     const String playerRun = "playerRunning";
@@ -43,42 +45,20 @@ public class PlayerController : MonoBehaviour
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
 
-        Debug.Log(sceneName);
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                {
-                    mainRigidbody.AddForce(new Vector2(-moveSpeed, 0));
-                    mainSpriteRenderer.flipX = false;
-                }
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                {
-                    mainRigidbody.AddForce(new Vector2(moveSpeed, 0));
-                    mainSpriteRenderer.flipX = true;
-                }*/
+
         bool hitTime = false;
         bool hitLever = false;
         bool hitLeverandShut = false;
+        bool hitElevator = false;
 
         bool IsGrounded()
         {
-            /*            Vector2 position = transform.position;
-                        Vector2 direction = Vector2.down;
-                        float distance = 1.215f;
 
-                        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-                        Debug.Log(hit.distance);
-                        if (hit.collider != null)
-                        {
-                            return true;
-                        }
-
-                        return false;*/
             RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .02f, groundLayer);
             return raycastHit2d.collider != null;
         }
@@ -123,6 +103,11 @@ public class PlayerController : MonoBehaviour
                 leverAndShut.activate();
                 hitLeverandShut = true;
             }
+            else if (onElevator)
+            {
+                elevator.startElevator();
+                hitElevator = true;
+            }
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -152,7 +137,7 @@ public class PlayerController : MonoBehaviour
         
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, futurePlayerDelay);
         }
     }
 
@@ -214,6 +199,11 @@ public class PlayerController : MonoBehaviour
             leverAndShut = col.GetComponent<LeverandShut>();
             onLeverandShut = true;
         }
+        if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = col.GetComponent<SmoothDoorController>();
+            onElevator = true;
+        }
 
     }
 
@@ -237,6 +227,11 @@ public class PlayerController : MonoBehaviour
         {
             leverAndShut = null;
             onLeverandShut = false;
+        }
+        if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = null;
+            onElevator = false;
         }
     }
 

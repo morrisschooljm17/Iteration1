@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class FuturePlayerController : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D futureBody;
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private BoxCollider2D boxCollider2D;
+    
     private LeverController leverController;
     private LeverandShut leverAndShutController;
+    private SmoothDoorController elevator;
+    public LayerMask dramaLayer;
 
     const String playerRun = "playerRunning";
     const String playerIdle = "Idle";
@@ -21,6 +26,12 @@ public class FuturePlayerController : MonoBehaviour
     bool onLeverandShut = false;
     bool onTimeMachine = false;
     bool onResetMachine = false;
+    bool playerDirectionRight = true;
+    bool onElevator = false;
+
+    bool m_HitDetect;
+    RaycastHit m_Hit;
+    Vector3 colliderSize= new Vector3(0,15,0);
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +41,38 @@ public class FuturePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool pastDrama()
+        {
+            if (playerDirectionRight)
+            {
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.right, 20f, dramaLayer);
+                if(raycastHit2d.collider != null && (raycastHit2d.transform.tag == "drama" || raycastHit2d.transform.tag == "Player"))
+                {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else
+            {
+                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.left, 20f, dramaLayer);
+                if(raycastHit2d.collider != null && (raycastHit2d.transform.tag == "drama" || raycastHit2d.transform.tag == "Player"))
+                {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        if (pastDrama())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
     }
-    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, float time)
+    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, bool elevator, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -41,10 +81,12 @@ public class FuturePlayerController : MonoBehaviour
             if (direction.x < 0)
             {
                 futureSpriteRenderer.flipX = true;
+                playerDirectionRight = false;
             }
             else if (direction.x > 0)
             {
                 futureSpriteRenderer.flipX = false;
+                playerDirectionRight = true;
             }
 
 
@@ -60,6 +102,10 @@ public class FuturePlayerController : MonoBehaviour
             if (hitLevernadShut)
             {
                 leverAndShutController.activate();
+            }
+            if (elevator)
+            {
+                this.elevator.startElevator();
             }
             if(Math.Abs(direction.x) >= .3){
                 handleAnimation(playerRun);
@@ -92,7 +138,7 @@ public class FuturePlayerController : MonoBehaviour
 
         private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || onResetMachine){
+            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator){
                 playerAnimator.Play(playerrunOnButton);
             }
             else{
@@ -100,7 +146,7 @@ public class FuturePlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || onResetMachine){
+            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -128,6 +174,11 @@ public class FuturePlayerController : MonoBehaviour
             leverAndShutController = col.GetComponent<LeverandShut>();
             onLeverandShut = true;
         }
+        if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = col.GetComponent<SmoothDoorController>();
+            onElevator = true;
+        }
 
     }
 
@@ -151,6 +202,11 @@ public class FuturePlayerController : MonoBehaviour
         {
             leverAndShutController = null;
             onLeverandShut = false;
+        }
+                if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = null;
+            onElevator = false;
         }
     }
 
