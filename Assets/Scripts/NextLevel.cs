@@ -9,7 +9,7 @@ public class NextLevel : MonoBehaviour
 {
     private bool lever;
     private int sceneNumber;
-    private int numberOfScenes = 8;
+    private int numberOfScenes = 10;
     // Start is called before the first frame update
     void Start()
     {

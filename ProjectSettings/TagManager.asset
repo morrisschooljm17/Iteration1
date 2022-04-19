@@ -12,6 +12,7 @@ TagManager:
   - LeverandShut
   - Destroyable Object
   - drama
+  - SmoothDoor
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,7 @@ public class FuturePlayerController : MonoBehaviour
     
     private LeverController leverController;
     private LeverandShut leverAndShutController;
+    private SmoothDoorController elevator;
     public LayerMask dramaLayer;
 
     const String playerRun = "playerRunning";
@@ -26,6 +27,7 @@ public class FuturePlayerController : MonoBehaviour
     bool onTimeMachine = false;
     bool onResetMachine = false;
     bool playerDirectionRight = true;
+    bool onElevator = false;
 
     bool m_HitDetect;
     RaycastHit m_Hit;
@@ -70,7 +72,7 @@ public class FuturePlayerController : MonoBehaviour
         }
 
     }
-    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, float time)
+    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, bool elevator, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -100,6 +102,10 @@ public class FuturePlayerController : MonoBehaviour
             if (hitLevernadShut)
             {
                 leverAndShutController.activate();
+            }
+            if (elevator)
+            {
+                this.elevator.startElevator();
             }
             if(Math.Abs(direction.x) >= .3){
                 handleAnimation(playerRun);
@@ -132,7 +138,7 @@ public class FuturePlayerController : MonoBehaviour
 
         private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || onResetMachine){
+            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator){
                 playerAnimator.Play(playerrunOnButton);
             }
             else{
@@ -140,7 +146,7 @@ public class FuturePlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || onResetMachine){
+            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -168,6 +174,11 @@ public class FuturePlayerController : MonoBehaviour
             leverAndShutController = col.GetComponent<LeverandShut>();
             onLeverandShut = true;
         }
+        if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = col.GetComponent<SmoothDoorController>();
+            onElevator = true;
+        }
 
     }
 
@@ -191,6 +202,11 @@ public class FuturePlayerController : MonoBehaviour
         {
             leverAndShutController = null;
             onLeverandShut = false;
+        }
+                if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = null;
+            onElevator = false;
         }
     }
 

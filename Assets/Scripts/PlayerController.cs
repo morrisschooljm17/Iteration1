@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
+    private SmoothDoorController elevator;
     public LayerMask groundLayer;
     private string sceneName;
     private bool inPresent;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool onLever = false;
     bool resetMachine = false;
     bool onLeverandShut = false;
+    bool onElevator = false;
     public bool isThereAFuturePlayer;
 
     const String playerRun = "playerRunning";
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
         bool hitTime = false;
         bool hitLever = false;
         bool hitLeverandShut = false;
+        bool hitElevator = false;
 
         bool IsGrounded()
         {
@@ -100,6 +103,11 @@ public class PlayerController : MonoBehaviour
                 leverAndShut.activate();
                 hitLeverandShut = true;
             }
+            else if (onElevator)
+            {
+                elevator.startElevator();
+                hitElevator = true;
+            }
         }
 
         Vector2 move = mainRigidbody.velocity;
@@ -129,7 +137,7 @@ public class PlayerController : MonoBehaviour
         
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, futurePlayerDelay);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, futurePlayerDelay);
         }
     }
 
@@ -191,6 +199,11 @@ public class PlayerController : MonoBehaviour
             leverAndShut = col.GetComponent<LeverandShut>();
             onLeverandShut = true;
         }
+        if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = col.GetComponent<SmoothDoorController>();
+            onElevator = true;
+        }
 
     }
 
@@ -214,6 +227,11 @@ public class PlayerController : MonoBehaviour
         {
             leverAndShut = null;
             onLeverandShut = false;
+        }
+        if (col.gameObject.tag == "SmoothDoor")
+        {
+            elevator = null;
+            onElevator = false;
         }
     }
 
