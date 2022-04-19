@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/level7.unity
     guid: be928c894af78c641b943834ee5be16b
   - enabled: 1
+    path: Assets/Scenes/introToPastSelf.unity
+    guid: fe51b431625079a47984920bca6f4bc2
+  - enabled: 1
     path: Assets/Scenes/FutureWalls.unity
     guid: 52cbbc8cb89dc254ea13fe278f0d86dd
   m_configObjects: {}

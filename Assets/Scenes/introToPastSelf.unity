@@ -788,7 +788,7 @@ MonoBehaviour:
   up: 0
   xAxis: 0
   yAxis: -5
-  speed: 15
+  speed: 25
   timedDoor: 0
   doorCloseTimer: 0
 --- !u!251 &337911614
@@ -1528,7 +1528,7 @@ MonoBehaviour:
   up: 0
   xAxis: 0
   yAxis: -5
-  speed: 15
+  speed: 25
   timedDoor: 0
   doorCloseTimer: 0
 --- !u!251 &849527174
@@ -3896,7 +3896,7 @@ MonoBehaviour:
   jumpSpeed: 12
   cameraMove: {fileID: 170982777}
   futurePlayerController: {fileID: 4231782389205167770}
-  futurePlayerDelay: 8
+  futurePlayerDelay: 6
   playerAnimator: {fileID: 5238157347670189103}
   groundLayer:
     serializedVersion: 2
