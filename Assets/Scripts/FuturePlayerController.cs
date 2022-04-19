@@ -11,6 +11,8 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D boxCollider2D;
+    [SerializeField] private GameObject[] avoidTheseThings;
+    [SerializeField] private bool futureDrama;
     
     private LeverController leverController;
     private LeverandShut leverAndShutController;
@@ -31,7 +33,9 @@ public class FuturePlayerController : MonoBehaviour
 
     bool m_HitDetect;
     RaycastHit m_Hit;
-    Vector3 colliderSize= new Vector3(0,15,0);
+    Vector3 rayCastStartRight;
+    Vector3 rayCastStartLeft;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,36 +45,35 @@ public class FuturePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool pastDrama()
-        {
-            if (playerDirectionRight)
-            {
-                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.right, 20f, dramaLayer);
-                if(raycastHit2d.collider != null && (raycastHit2d.transform.tag == "drama" || raycastHit2d.transform.tag == "Player"))
-                {
-                    return true;
+        if(futureDrama){
+            rayCastStartRight = boxCollider2D.bounds.center + new Vector3(.55f,.77f,0);
+            rayCastStartLeft = boxCollider2D.bounds.center + new Vector3(-.55f,.77f,0);
+            bool pastDrama(){
+                if(playerDirectionRight){
+                    foreach(GameObject avoid in avoidTheseThings){
+                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartRight, avoid.transform.position-rayCastStartRight, 100f, dramaLayer);
+                        Debug.DrawRay(rayCastStartRight, avoid.transform.position-rayCastStartRight, Color.green);
+                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player")){
+                            return true;
+                        }
+                    }
                 }
                 else{
-                    return false;
+                    foreach(GameObject avoid in avoidTheseThings){
+                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, 100f, dramaLayer);
+                        //Debug.DrawRay(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, Color.red);
+                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player")){
+                            return true;
+                        }
+                    }  
                 }
+                return false;
             }
-            else
+            if (pastDrama())
             {
-                RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.left, 20f, dramaLayer);
-                if(raycastHit2d.collider != null && (raycastHit2d.transform.tag == "drama" || raycastHit2d.transform.tag == "Player"))
-                {
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
-        if (pastDrama())
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
     }
     public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, bool elevator, float time)
     {
@@ -154,6 +157,13 @@ public class FuturePlayerController : MonoBehaviour
             }
         }
     }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
         private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "TimeMachine")
@@ -209,6 +219,7 @@ public class FuturePlayerController : MonoBehaviour
             onElevator = false;
         }
     }
+
 
 
 }
