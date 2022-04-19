@@ -160,6 +160,10 @@ MonoBehaviour:
   futureSpriteRenderer: {fileID: 46984898}
   playerAnimator: {fileID: 46984897}
   boxCollider2D: {fileID: 46984896}
+  avoidTheseThings:
+  - {fileID: 188622113}
+  - {fileID: 1794487606}
+  futureDrama: 1
   dramaLayer:
     serializedVersion: 2
     m_Bits: 126

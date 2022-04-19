@@ -13,6 +13,7 @@ TagManager:
   - Destroyable Object
   - drama
   - SmoothDoor
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Water
   - UI
   - drama
-  - 
+  - seeThrough
   - 
   - 
   - 

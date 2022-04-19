@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FutureWalls.unity
     guid: 52cbbc8cb89dc254ea13fe278f0d86dd
+  - enabled: 1
+    path: Assets/Scenes/BehindYou.unity
+    guid: 8856b04125c46b84b81552d0c534dddb
   m_configObjects: {}
