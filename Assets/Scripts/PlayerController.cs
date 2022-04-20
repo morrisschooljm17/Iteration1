@@ -226,13 +226,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "MovingBox")
-        {
-            col.gameObject.tag = "DramaBox";
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D col)
+    // {
+    //     if (col.gameObject.tag == "MovingBox")
+    //     {
+    //         col.gameObject.tag = "DramaBox";
+    //     }
+    // }
     private LinkedList<int> boxesBeingTouched = new LinkedList<int>();
 
     private void OnTriggerEnter2D(Collider2D col)

@@ -122,8 +122,7 @@ public class FuturePlayerController : MonoBehaviour
             }
             if (hitTime)
             {
-                StartCoroutine(SpinPlayer(futureBody));
-                
+                StartCoroutine(SpinPlayer(futureBody));               
             }
             else if (hitLever)
             {
@@ -146,7 +145,7 @@ public class FuturePlayerController : MonoBehaviour
 
             futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
-                if(holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated && futureBoxPositions[i].tag.Equals("DramaBox")){}
+                if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox")){}
                 else{
                     futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
                 }
