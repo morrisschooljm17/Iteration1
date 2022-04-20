@@ -146,7 +146,10 @@ public class FuturePlayerController : MonoBehaviour
 
             futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
-                futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
+                if(holdingBox && boxBeingHeld.transform.position == futureBoxPositions[i].position){}
+                else{
+                    futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
+                }
             }
             
 
