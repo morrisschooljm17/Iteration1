@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool resetMachine = false;
     bool onLeverandShut = false;
     public bool isThereAFuturePlayer;
+    public bool canSnap;
 
     const String playerRun = "playerRunning";
     const String playerIdle = "Idle";
@@ -45,6 +46,16 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log(sceneName);
 
+        if (GameObject.Find("snapTrigger") != null)
+        {
+            Debug.Log("snap works");
+            canSnap = true;
+        }
+        else
+        {
+            Debug.Log("snap doesn't work");
+            canSnap = false;
+        }
 
     }
 
@@ -86,13 +97,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) 
         {
 
-            if (sceneName == "level4" && inPresent) {                
+            if (canSnap && inPresent) {                
                 transform.position += new Vector3(50, 0, 0);
                 cameraMove.transform.position += new Vector3(50, 0, 0);
                 inPresent = false;                               
             }
 
-            else if (sceneName == "level4" && !inPresent)
+            else if (canSnap && !inPresent)
             {               
                 transform.position += new Vector3(-50, 0, 0);
                 cameraMove.transform.position += new Vector3(-50, 0, 0);
