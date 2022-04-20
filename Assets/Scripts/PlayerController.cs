@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
+        Physics2D.queriesHitTriggers = false;
 
     }
 

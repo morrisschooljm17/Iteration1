@@ -101,31 +101,6 @@ public class FuturePlayerController : MonoBehaviour
                 }
                 playerDirectionRight = true;
             }
-
-
-            if (hitTime)
-            {
-                StartCoroutine(SpinPlayer(futureBody));
-                
-            }
-            if (hitLever)
-            {
-                leverController.openDoor();
-            }
-            if (hitLevernadShut)
-            {
-                leverAndShutController.activate();
-            }
-            if (elevator)
-            {
-                this.elevator.startElevator();
-            }
-            if(Math.Abs(direction.x) >= .3){
-                handleAnimation(playerRun);
-            }
-            else{
-                handleAnimation(playerIdle);
-            }
             if (grabbedBox){
                 if (onMovingBox && (holdingBox == false)){
                     boxBeingHeld = movingBox;
@@ -143,6 +118,30 @@ public class FuturePlayerController : MonoBehaviour
                 boxBeingHeld = null;
                 holdingBox = false;
             }
+            if (hitTime)
+            {
+                StartCoroutine(SpinPlayer(futureBody));
+                
+            }
+            else if (hitLever)
+            {
+                leverController.openDoor();
+            }
+            else if (hitLevernadShut)
+            {
+                leverAndShutController.activate();
+            }
+            else if (elevator)
+            {
+                this.elevator.startElevator();
+            }
+            if(Math.Abs(direction.x) >= .3){
+                handleAnimation(playerRun);
+            }
+            else{
+                handleAnimation(playerIdle);
+            }
+
             futureBody.position = move + new Vector2(50, 0);
 
         }
@@ -245,7 +244,7 @@ public class FuturePlayerController : MonoBehaviour
             leverAndShutController = null;
             onLeverandShut = false;
         }
-                if (col.gameObject.tag == "SmoothDoor")
+        if (col.gameObject.tag == "SmoothDoor")
         {
             elevator = null;
             onElevator = false;
