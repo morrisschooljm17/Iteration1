@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FuturePlayerController futurePlayerController;
     [SerializeField] private float futurePlayerDelay;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private bool isThereBoxes;
+    [SerializeField] private Transform[] boxPositions;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
@@ -110,7 +112,7 @@ public class PlayerController : MonoBehaviour
                 elevator.startElevator();
                 hitElevator = true;
             }
-            if(onMovingBox && (holdingBox == false) && isNotLockedOut){
+            if(onMovingBox && (holdingBox == false) && isNotLockedOut && !onTimeMachine){
                 boxBeingHeld = movingBox;
                 boxBeingHeld.transform.parent = transform;
                 boxBeingHeld.simulated = false;
@@ -133,9 +135,6 @@ public class PlayerController : MonoBehaviour
                 hitTime = true;
             }
         }
-
-
-
         Vector2 move = mainRigidbody.velocity;
         float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
@@ -169,9 +168,18 @@ public class PlayerController : MonoBehaviour
         }
         mainRigidbody.velocity = move;
         
-        if (isThereAFuturePlayer)
+        if (isThereAFuturePlayer && isThereBoxes)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, grabbedBox, droppedBox, futurePlayerDelay);
+            Vector3[] boxPos = new Vector3[boxPositions.Length];
+            for(int i = 0; i < boxPositions.Length; i++){
+                boxPos[i] = boxPositions[i].position;
+            }
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
+            hitElevator, grabbedBox, droppedBox, boxPos, futurePlayerDelay);
+        }
+        else if(isThereAFuturePlayer){
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
+            hitElevator, futurePlayerDelay);
         }
     }
 

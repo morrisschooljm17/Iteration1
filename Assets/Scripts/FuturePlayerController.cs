@@ -13,6 +13,7 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider2D;
     [SerializeField] private bool futureDrama;
     [SerializeField] private GameObject[] avoidTheseThings;
+    [SerializeField] private Transform[] futureBoxPositions;
 
     
     private LeverController leverController;
@@ -79,7 +80,8 @@ public class FuturePlayerController : MonoBehaviour
             }
         }
     }
-    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, bool elevator, bool grabbedBox, bool droppedBox, float time)
+    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, 
+    bool elevator, bool grabbedBox, bool droppedBox, Vector3[] boxPos, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -143,6 +145,10 @@ public class FuturePlayerController : MonoBehaviour
             }
 
             futureBody.position = move + new Vector2(50, 0);
+            for(int i = 0; i < boxPos.Length; i++){
+                futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
+            }
+            
 
         }
         return !hitTime;
@@ -256,6 +262,53 @@ public class FuturePlayerController : MonoBehaviour
 
     }
 
+public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, 
+    bool elevator, float time)
+    {
+        StartCoroutine(MoveFutureSelf());
+        IEnumerator MoveFutureSelf()
+        {
+            yield return new WaitForSeconds(time);
+            if (direction.x < 0)
+            {
+                futureSpriteRenderer.flipX = true;
+                playerDirectionRight = false;
+            }
+            else if (direction.x > 0)
+            {
+                futureSpriteRenderer.flipX = false;
+                playerDirectionRight = true;
+            }
 
+            if (hitTime)
+            {
+                StartCoroutine(SpinPlayer(futureBody));
+                
+            }
+            else if (hitLever)
+            {
+                leverController.openDoor();
+            }
+            else if (hitLevernadShut)
+            {
+                leverAndShutController.activate();
+            }
+            else if (elevator)
+            {
+                this.elevator.startElevator();
+            }
+            if(Math.Abs(direction.x) >= .3){
+                handleAnimation(playerRun);
+            }
+            else{
+                handleAnimation(playerIdle);
+            }
+
+            futureBody.position = move + new Vector2(50, 0);
+            
+
+        }
+        return !hitTime;
+    }
 
 }
