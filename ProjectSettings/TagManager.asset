@@ -15,6 +15,7 @@ TagManager:
   - SmoothDoor
   - platform
   - FloorButton
+  - MovingBox
   layers:
   - Default
   - TransparentFX

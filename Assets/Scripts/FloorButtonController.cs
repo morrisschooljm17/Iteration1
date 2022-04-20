@@ -10,6 +10,7 @@ public class FloorButtonController : MonoBehaviour
     [SerializeField] Transform pressurePlate;
     [SerializeField] SmoothDoor[] doorsToOpen;
     private Vector3 originalPosition;
+    private Vector3 newRedPlatePos;
     private bool playerOn = false;
     private bool objectOn = false;
     private bool doorsOpen = false;
@@ -18,13 +19,9 @@ public class FloorButtonController : MonoBehaviour
     void Start()
     {
         originalPosition = pressurePlate.position;
+        newRedPlatePos = pressurePlate.position + new Vector3(0, -5f, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OpenOrCloseAllTheDoors(){
         foreach(SmoothDoor door in doorsToOpen){
             door.openDoor();
@@ -32,21 +29,18 @@ public class FloorButtonController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag == "Player"){
-            pressurePlate.transform.position += new Vector3(0, -5f, 0);
+        if(col.gameObject.tag == "Player"){         
             playerOn = true;
         }
         if(col.gameObject.tag == "MovingBox"){
-            pressurePlate.transform.position += new Vector3(0, -5f, 0);
             objectOn = true;
         }
         spriteRenderer.sprite = greenBox;
+        pressurePlate.transform.position = newRedPlatePos;
         if(doorsOpen == false){
             OpenOrCloseAllTheDoors();
             doorsOpen = true;
         }
-
-
     }
     private void OnTriggerExit2D(Collider2D col){
         if(col.gameObject.tag == "Player"){
