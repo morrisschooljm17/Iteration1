@@ -27,13 +27,13 @@ public class FloorButtonController : MonoBehaviour
             door.openDoor();
         }
     }
-
+    private LinkedList<int> boxes = new LinkedList<int>();
     private void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Player"){         
             playerOn = true;
         }
-        if(col.gameObject.tag == "MovingBox"){
-            objectOn = true;
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox"){
+            boxes.AddLast(1);
         }
         spriteRenderer.sprite = greenBox;
         pressurePlate.transform.position = newRedPlatePos;
@@ -46,10 +46,10 @@ public class FloorButtonController : MonoBehaviour
         if(col.gameObject.tag == "Player"){
             playerOn = false;
         }
-        if(col.gameObject.tag == "MovingBox"){
-            objectOn = false;
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox"){
+            boxes.RemoveFirst();
         }
-        if(playerOn == false && objectOn == false){
+        if(playerOn == false && boxes.Count == 0){
                 pressurePlate.position = originalPosition;
                 spriteRenderer.sprite = redBox;
                 OpenOrCloseAllTheDoors();

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1117858827615639482}
   - component: {fileID: 2573258966892016727}
   - component: {fileID: 7305696873584749178}
+  - component: {fileID: 217588669861753849}
   m_Layer: 3
   m_Name: MovingBox
   m_TagString: MovingBox
@@ -185,3 +186,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.2973212}
   m_EdgeRadius: 0
+--- !u!114 &217588669861753849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117858827615639487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c547f28fea9104e93b9b5cfae7275b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

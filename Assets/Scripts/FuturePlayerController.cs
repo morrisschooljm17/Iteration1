@@ -57,8 +57,8 @@ public class FuturePlayerController : MonoBehaviour
                 if(playerDirectionRight){
                     foreach(GameObject avoid in avoidTheseThings){
                         RaycastHit2D hit = Physics2D.Raycast(rayCastStartRight, avoid.transform.position-rayCastStartRight, 100f, dramaLayer);
-                        Debug.DrawRay(rayCastStartRight, avoid.transform.position-rayCastStartRight, Color.green);
-                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player")){
+                        //Debug.DrawRay(rayCastStartRight, avoid.transform.position-rayCastStartRight, Color.green);
+                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player" || hit.transform.tag == "DramaBox")){
                             return true;
                         }
                     }
@@ -67,7 +67,7 @@ public class FuturePlayerController : MonoBehaviour
                     foreach(GameObject avoid in avoidTheseThings){
                         RaycastHit2D hit = Physics2D.Raycast(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, 100f, dramaLayer);
                         //Debug.DrawRay(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, Color.red);
-                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player")){
+                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player" || hit.transform.tag == "DramaBox")){
                             return true;
                         }
                     }  
@@ -146,7 +146,7 @@ public class FuturePlayerController : MonoBehaviour
 
             futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
-                if(holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated){}
+                if(holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated && futureBoxPositions[i].tag.Equals("DramaBox")){}
                 else{
                     futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
                 }

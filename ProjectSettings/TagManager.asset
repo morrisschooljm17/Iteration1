@@ -16,6 +16,7 @@ TagManager:
   - platform
   - FloorButton
   - MovingBox
+  - DramaBox
   layers:
   - Default
   - TransparentFX
