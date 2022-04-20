@@ -11,13 +11,17 @@ public class FuturePlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D boxCollider2D;
-    [SerializeField] private GameObject[] avoidTheseThings;
     [SerializeField] private bool futureDrama;
+    [SerializeField] private GameObject[] avoidTheseThings;
+    [SerializeField] private Transform[] futureBoxPositions;
+
     
     private LeverController leverController;
     private LeverandShut leverAndShutController;
     private SmoothDoorController elevator;
     public LayerMask dramaLayer;
+    private Rigidbody2D movingBox;
+    private Rigidbody2D boxBeingHeld;
 
     const String playerRun = "playerRunning";
     const String playerIdle = "Idle";
@@ -30,7 +34,8 @@ public class FuturePlayerController : MonoBehaviour
     bool onResetMachine = false;
     bool playerDirectionRight = true;
     bool onElevator = false;
-
+    bool holdingBox = false;
+    bool onMovingBox;
     bool m_HitDetect;
     RaycastHit m_Hit;
     Vector3 rayCastStartRight;
@@ -75,7 +80,8 @@ public class FuturePlayerController : MonoBehaviour
             }
         }
     }
-    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, bool elevator, float time)
+    public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, 
+    bool elevator, bool grabbedBox, bool droppedBox, Vector3[] boxPos, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -84,29 +90,50 @@ public class FuturePlayerController : MonoBehaviour
             if (direction.x < 0)
             {
                 futureSpriteRenderer.flipX = true;
+                if(holdingBox){
+                    boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);
+                }
                 playerDirectionRight = false;
             }
             else if (direction.x > 0)
             {
                 futureSpriteRenderer.flipX = false;
+                if(holdingBox){
+                    boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);
+                }
                 playerDirectionRight = true;
             }
-
-
+            if (grabbedBox){
+                if (onMovingBox && (holdingBox == false)){
+                    boxBeingHeld = movingBox;
+                    boxBeingHeld.transform.parent = transform;
+                    boxBeingHeld.simulated = false;
+                    grabbedBox = true;
+                    holdingBox = true;
+                    if(playerDirectionRight){boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);}
+                    else{boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);}
+                }
+            }
+            else if(droppedBox){
+                boxBeingHeld.transform.parent = null;
+                boxBeingHeld.simulated = true;
+                boxBeingHeld = null;
+                holdingBox = false;
+            }
             if (hitTime)
             {
                 StartCoroutine(SpinPlayer(futureBody));
                 
             }
-            if (hitLever)
+            else if (hitLever)
             {
                 leverController.openDoor();
             }
-            if (hitLevernadShut)
+            else if (hitLevernadShut)
             {
                 leverAndShutController.activate();
             }
-            if (elevator)
+            else if (elevator)
             {
                 this.elevator.startElevator();
             }
@@ -116,7 +143,15 @@ public class FuturePlayerController : MonoBehaviour
             else{
                 handleAnimation(playerIdle);
             }
+
             futureBody.position = move + new Vector2(50, 0);
+            for(int i = 0; i < boxPos.Length; i++){
+                if(holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated){}
+                else{
+                    futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
+                }
+            }
+            
 
         }
         return !hitTime;
@@ -141,7 +176,7 @@ public class FuturePlayerController : MonoBehaviour
 
         private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator){
+            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator || onMovingBox || holdingBox){
                 playerAnimator.Play(playerrunOnButton);
             }
             else{
@@ -149,7 +184,7 @@ public class FuturePlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator){
+            if(onLever || onLeverandShut || onTimeMachine || onResetMachine || onElevator || onMovingBox || holdingBox){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -189,6 +224,11 @@ public class FuturePlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
+        if(col.gameObject.tag == "MovingBox"){
+            onMovingBox = true;
+            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
+        }
+
 
     }
 
@@ -213,13 +253,65 @@ public class FuturePlayerController : MonoBehaviour
             leverAndShutController = null;
             onLeverandShut = false;
         }
-                if (col.gameObject.tag == "SmoothDoor")
+        if (col.gameObject.tag == "SmoothDoor")
         {
             elevator = null;
             onElevator = false;
         }
+        if(col.gameObject.tag == "MovingBox"){
+            onMovingBox = false;
+            movingBox = null;
+        }
+
     }
 
+public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, 
+    bool elevator, float time)
+    {
+        StartCoroutine(MoveFutureSelf());
+        IEnumerator MoveFutureSelf()
+        {
+            yield return new WaitForSeconds(time);
+            if (direction.x < 0)
+            {
+                futureSpriteRenderer.flipX = true;
+                playerDirectionRight = false;
+            }
+            else if (direction.x > 0)
+            {
+                futureSpriteRenderer.flipX = false;
+                playerDirectionRight = true;
+            }
 
+            if (hitTime)
+            {
+                StartCoroutine(SpinPlayer(futureBody));
+                
+            }
+            else if (hitLever)
+            {
+                leverController.openDoor();
+            }
+            else if (hitLevernadShut)
+            {
+                leverAndShutController.activate();
+            }
+            else if (elevator)
+            {
+                this.elevator.startElevator();
+            }
+            if(Math.Abs(direction.x) >= .3){
+                handleAnimation(playerRun);
+            }
+            else{
+                handleAnimation(playerIdle);
+            }
+
+            futureBody.position = move + new Vector2(50, 0);
+            
+
+        }
+        return !hitTime;
+    }
 
 }

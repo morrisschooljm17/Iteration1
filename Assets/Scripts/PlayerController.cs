@@ -15,10 +15,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FuturePlayerController futurePlayerController;
     [SerializeField] private float futurePlayerDelay;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private bool isThereBoxes;
+    [SerializeField] private Transform[] boxPositions;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
     private SmoothDoorController elevator;
+    private Rigidbody2D movingBox;
+    private Rigidbody2D boxBeingHeld;
     public LayerMask groundLayer;
     private string sceneName;
     private bool inPresent;
@@ -28,6 +32,10 @@ public class PlayerController : MonoBehaviour
     bool resetMachine = false;
     bool onLeverandShut = false;
     bool onElevator = false;
+    bool onMovingBox = false;
+    bool holdingBox = false;
+    bool facingRight = true;
+    private bool isNotLockedOut = true;
     public bool isThereAFuturePlayer;
 
     const String playerRun = "playerRunning";
@@ -44,6 +52,7 @@ public class PlayerController : MonoBehaviour
 
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
+        Physics2D.queriesHitTriggers = false;
 
     }
 
@@ -55,10 +64,11 @@ public class PlayerController : MonoBehaviour
         bool hitLever = false;
         bool hitLeverandShut = false;
         bool hitElevator = false;
+        bool grabbedBox = false;
+        bool droppedBox = false;
 
         bool IsGrounded()
         {
-
             RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .02f, groundLayer);
             return raycastHit2d.collider != null;
         }
@@ -78,22 +88,16 @@ public class PlayerController : MonoBehaviour
                 cameraMove.transform.position += new Vector3(-50, 0, 0);
                 inPresent = true;
             }
-
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (onTimeMachine)
-            {
-                timeMachine.timeTravel(mainRigidbody, cameraMove);
-                hitTime = true;
-            }
-            else if (onLever)
+            if (onLever)
             {
                 leverController.openDoor();
                 hitLever = true;
             }
-            else if (resetMachine)
+            else if (resetMachine && isNotLockedOut)
             {
                 StartCoroutine(SpinPlayer(mainRigidbody));
 
@@ -108,17 +112,46 @@ public class PlayerController : MonoBehaviour
                 elevator.startElevator();
                 hitElevator = true;
             }
+            if(onMovingBox && (holdingBox == false) && isNotLockedOut && !onTimeMachine){
+                boxBeingHeld = movingBox;
+                boxBeingHeld.transform.parent = transform;
+                boxBeingHeld.simulated = false;
+                grabbedBox = true;
+                holdingBox = true;
+                if(facingRight){boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);}
+                else{boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);}
+            }
+            else if(holdingBox == true){
+                boxBeingHeld.transform.parent = null;
+                boxBeingHeld.simulated = true;
+                boxBeingHeld = null;
+                holdingBox = false;
+                droppedBox = true;
+            }
+            if(onTimeMachine && isNotLockedOut)
+            {
+                StartCoroutine(LockOut());
+                timeMachine.timeTravel(mainRigidbody, cameraMove);
+                hitTime = true;
+            }
         }
-
         Vector2 move = mainRigidbody.velocity;
         float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
         {
             mainSpriteRenderer.flipX = true;
+            if(holdingBox){
+                boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);
+            }
+            facingRight = false;
         }
         else if (hor > 0)
         {
             mainSpriteRenderer.flipX = false;
+            if(holdingBox){
+                boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);
+            }
+            facingRight = true;
         }
 
         move.x = hor * moveSpeed;
@@ -135,12 +168,26 @@ public class PlayerController : MonoBehaviour
         }
         mainRigidbody.velocity = move;
         
-        if (isThereAFuturePlayer)
+        if (isThereAFuturePlayer && isThereBoxes)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, futurePlayerDelay);
+            Vector3[] boxPos = new Vector3[boxPositions.Length];
+            for(int i = 0; i < boxPositions.Length; i++){
+                boxPos[i] = boxPositions[i].position;
+            }
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
+            hitElevator, grabbedBox, droppedBox, boxPos, futurePlayerDelay);
+        }
+        else if(isThereAFuturePlayer){
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
+            hitElevator, futurePlayerDelay);
         }
     }
 
+    IEnumerator LockOut(){
+        isNotLockedOut = false;
+        yield return new WaitForSeconds(1.1f);
+        isNotLockedOut = true;
+    }
     IEnumerator SpinPlayer(Rigidbody2D player)
     {
         Vector3 local = player.transform.localScale;
@@ -161,7 +208,7 @@ public class PlayerController : MonoBehaviour
     
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
                 playerAnimator.Play(playerRunOnButton);
             }
             else{
@@ -169,7 +216,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -204,6 +251,10 @@ public class PlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
+        if(col.gameObject.tag == "MovingBox"){
+            onMovingBox = true;
+            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
+        }
 
     }
 
@@ -232,6 +283,10 @@ public class PlayerController : MonoBehaviour
         {
             elevator = null;
             onElevator = false;
+        }
+        if(col.gameObject.tag == "MovingBox"){
+            onMovingBox = false;
+            movingBox = null;
         }
     }
 
