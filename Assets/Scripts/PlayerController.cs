@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private LeverController leverController;
     private LeverandShut leverAndShut;
     private SmoothDoorController elevator;
+    private Rigidbody2D movingBox;
+    private Rigidbody2D boxBeingHeld;
     public LayerMask groundLayer;
     private string sceneName;
     private bool inPresent;
@@ -28,6 +30,10 @@ public class PlayerController : MonoBehaviour
     bool resetMachine = false;
     bool onLeverandShut = false;
     bool onElevator = false;
+    bool onMovingBox = false;
+    bool holdingBox = false;
+    bool facingRight = true;
+    private bool isNotLockedOut = true;
     public bool isThereAFuturePlayer;
 
     const String playerRun = "playerRunning";
@@ -55,10 +61,11 @@ public class PlayerController : MonoBehaviour
         bool hitLever = false;
         bool hitLeverandShut = false;
         bool hitElevator = false;
+        bool grabbedBox = false;
+        bool droppedBox = false;
 
         bool IsGrounded()
         {
-
             RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size + new Vector3(0, .1f, 0), 0f, Vector2.down, .02f, groundLayer);
             return raycastHit2d.collider != null;
         }
@@ -83,8 +90,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (onTimeMachine)
+            if (onTimeMachine && isNotLockedOut)
             {
+                StartCoroutine(LockOut());
                 timeMachine.timeTravel(mainRigidbody, cameraMove);
                 hitTime = true;
             }
@@ -93,7 +101,7 @@ public class PlayerController : MonoBehaviour
                 leverController.openDoor();
                 hitLever = true;
             }
-            else if (resetMachine)
+            else if (resetMachine && isNotLockedOut)
             {
                 StartCoroutine(SpinPlayer(mainRigidbody));
 
@@ -108,17 +116,43 @@ public class PlayerController : MonoBehaviour
                 elevator.startElevator();
                 hitElevator = true;
             }
+            if(onMovingBox && (holdingBox == false) && isNotLockedOut){
+                boxBeingHeld = movingBox;
+                boxBeingHeld.transform.parent = transform;
+                boxBeingHeld.simulated = false;
+                grabbedBox = true;
+                holdingBox = true;
+                if(facingRight){boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);}
+                else{boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);}
+            }
+            else if(holdingBox == true){
+                boxBeingHeld.transform.parent = null;
+                boxBeingHeld.simulated = true;
+                boxBeingHeld = null;
+                holdingBox = false;
+                droppedBox = true;
+            }
         }
+
+
 
         Vector2 move = mainRigidbody.velocity;
         float hor = Input.GetAxis("Horizontal");
         if (hor < 0)
         {
             mainSpriteRenderer.flipX = true;
+            if(holdingBox){
+                boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);
+            }
+            facingRight = false;
         }
         else if (hor > 0)
         {
             mainSpriteRenderer.flipX = false;
+            if(holdingBox){
+                boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);
+            }
+            facingRight = true;
         }
 
         move.x = hor * moveSpeed;
@@ -137,10 +171,15 @@ public class PlayerController : MonoBehaviour
         
         if (isThereAFuturePlayer)
         {
-            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, futurePlayerDelay);
+            isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, hitElevator, grabbedBox, droppedBox, futurePlayerDelay);
         }
     }
 
+    IEnumerator LockOut(){
+        isNotLockedOut = false;
+        yield return new WaitForSeconds(1.1f);
+        isNotLockedOut = true;
+    }
     IEnumerator SpinPlayer(Rigidbody2D player)
     {
         Vector3 local = player.transform.localScale;
@@ -161,7 +200,7 @@ public class PlayerController : MonoBehaviour
     
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
                 playerAnimator.Play(playerRunOnButton);
             }
             else{
@@ -169,7 +208,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -204,6 +243,10 @@ public class PlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
+        if(col.gameObject.tag == "MovingBox"){
+            onMovingBox = true;
+            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
+        }
 
     }
 
@@ -232,6 +275,10 @@ public class PlayerController : MonoBehaviour
         {
             elevator = null;
             onElevator = false;
+        }
+        if(col.gameObject.tag == "MovingBox"){
+            onMovingBox = false;
+            movingBox = null;
         }
     }
 
