@@ -85,18 +85,11 @@ public class PlayerController : MonoBehaviour
                 cameraMove.transform.position += new Vector3(-50, 0, 0);
                 inPresent = true;
             }
-
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (onTimeMachine && isNotLockedOut)
-            {
-                StartCoroutine(LockOut());
-                timeMachine.timeTravel(mainRigidbody, cameraMove);
-                hitTime = true;
-            }
-            else if (onLever)
+            if (onLever)
             {
                 leverController.openDoor();
                 hitLever = true;
@@ -131,6 +124,12 @@ public class PlayerController : MonoBehaviour
                 boxBeingHeld = null;
                 holdingBox = false;
                 droppedBox = true;
+            }
+            if(onTimeMachine && isNotLockedOut)
+            {
+                StartCoroutine(LockOut());
+                timeMachine.timeTravel(mainRigidbody, cameraMove);
+                hitTime = true;
             }
         }
 
