@@ -12,11 +12,20 @@ EditorBuildSettings:
     path: Assets/Scenes/level1.unity
     guid: 55edb4f6bf3a1004eae334fe4bc41c16
   - enabled: 1
+    path: Assets/Scenes/level2.unity
+    guid: ee1eb29ef5d9bde409eae4e291f35db4
+  - enabled: 1
+    path: Assets/Scenes/level3.unity
+    guid: 68bb30c1fbd6cee4f969dd6eb6272203
+  - enabled: 1
+    path: Assets/Scenes/level4.unity
+    guid: e467264b88f5731408d858730d1b516c
+  - enabled: 1
     path: Assets/Scenes/level5.unity
     guid: eb742656dfc85fe46a26ad32dce4839a
   - enabled: 1
-    path: Assets/Scenes/level2.unity
-    guid: ee1eb29ef5d9bde409eae4e291f35db4
+    path: Assets/Scenes/PressureIntrol.unity
+    guid: 14962846f03c4fe46be65761126a536f
   - enabled: 1
     path: Assets/Scenes/level6.unity
     guid: 432a1116280ee4c43a4988f8fb35490a
@@ -24,9 +33,12 @@ EditorBuildSettings:
     path: Assets/Scenes/level7.unity
     guid: be928c894af78c641b943834ee5be16b
   - enabled: 1
-    path: Assets/Scenes/level3.unity
-    guid: 68bb30c1fbd6cee4f969dd6eb6272203
+    path: Assets/Scenes/introToPastSelf.unity
+    guid: fe51b431625079a47984920bca6f4bc2
   - enabled: 1
-    path: Assets/Scenes/level4.unity
-    guid: e467264b88f5731408d858730d1b516c
+    path: Assets/Scenes/FutureWalls.unity
+    guid: 52cbbc8cb89dc254ea13fe278f0d86dd
+  - enabled: 1
+    path: Assets/Scenes/BehindYou.unity
+    guid: 8856b04125c46b84b81552d0c534dddb
   m_configObjects: {}

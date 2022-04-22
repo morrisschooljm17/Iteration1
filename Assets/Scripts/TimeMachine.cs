@@ -11,6 +11,7 @@ public class TimeMachine : MonoBehaviour
     private Vector3 otherTimeMachinePosistion;
 
     Vector3 cameraPosNew;
+    Vector3 local;
 
     private void Start()
     {
@@ -28,12 +29,12 @@ public class TimeMachine : MonoBehaviour
         {
             cameraPosNew = camera.transform.position + new Vector3(-50, 0, 0);
         }
+        local = player.transform.localScale;
         StartCoroutine(SpinPlayer(player, camera));
     }
 
     IEnumerator SpinPlayer(Rigidbody2D player, Camera camera)
     {
-        Vector3 local = player.transform.localScale;
         Vector3 position = player.transform.position;
 
         for (int i = 0; i < 100; i++)

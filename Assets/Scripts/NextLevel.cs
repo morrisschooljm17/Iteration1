@@ -8,27 +8,36 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour
 {
     private bool lever;
-    private String nextLevelName;
+    private int sceneNumber;
+    private int numberOfScenes = 0;
     // Start is called before the first frame update
     void Start()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        string sceneNumber = new string(scene.Where(Char.IsDigit).ToArray());
-        int result = Int32.Parse(sceneNumber)+1;
-        nextLevelName = "level" + result;
-
+        sceneNumber = SceneManager.GetActiveScene().buildIndex + 1;
+        bool stop = true;
+        while(stop){
+            try{
+                SceneManager.GetSceneByBuildIndex(numberOfScenes);
+                numberOfScenes++;
+            }
+            catch{
+                stop = false;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && lever && nextLevelName == "level8")
+        if (Input.GetKeyDown(KeyCode.E) && lever && sceneNumber < numberOfScenes)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene(sceneNumber);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && lever){
-            SceneManager.LoadScene(nextLevelName);
+        else if(Input.GetKeyDown(KeyCode.E) && lever && sceneNumber == numberOfScenes)
+        {
+            SceneManager.LoadScene(0);
         }
+
     }
     void OnTriggerEnter2D(Collider2D col)
     {

@@ -11,6 +11,11 @@ TagManager:
   - ResetMachine
   - LeverandShut
   - Destroyable Object
+  - drama
+  - SmoothDoor
+  - platform
+  - FloorButton
+  - MovingBox
   layers:
   - Default
   - TransparentFX
@@ -19,7 +24,8 @@ TagManager:
   - Water
   - UI
   - background
-  - 
+  - drama
+  - seeThrough
   - 
   - 
   - 
