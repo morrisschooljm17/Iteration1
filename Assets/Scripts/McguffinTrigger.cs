@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class McguffinTrigger : MonoBehaviour
 {
     private bool mcguffinTrigger;
     public PlayerController ps;
+    public TMP_Text textObject;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +23,11 @@ public class McguffinTrigger : MonoBehaviour
             Destroy(gameObject);
             ps.canSnap = true;
 
-            if (GameObject.Find("IntroText") != null) {
+            if (textObject != null) {
 
                 Debug.Log("HERE");
 
-                GameObject.Find("IntroText").SetActive(true);
-            
+                textObject.enabled = true;
             }
 
         }
