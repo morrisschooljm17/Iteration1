@@ -18,9 +18,16 @@ public class McguffinTrigger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && mcguffinTrigger)
         {
-
             Destroy(gameObject);
             ps.canSnap = true;
+
+            if (GameObject.Find("IntroText") != null) {
+
+                Debug.Log("HERE");
+
+                GameObject.Find("IntroText").SetActive(true);
+            
+            }
 
         }
     }
