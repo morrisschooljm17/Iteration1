@@ -23,6 +23,7 @@ TagManager:
   - floor
   - Water
   - UI
+  - background
   - drama
   - seeThrough
   - 
@@ -50,6 +51,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 1222243361
+    locked: 0
   - name: door
     uniqueID: 1369956959
     locked: 0
