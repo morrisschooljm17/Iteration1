@@ -16,8 +16,7 @@ public class Camera : MonoBehaviour
     {
 
         transform.position = new Vector3(transform.position.x,
-        GameObject.Find("Player").transform.position.y,
-        transform.position.z);
+        GameObject.Find("Player").transform.position.y, transform.position.z);
 
     }
 }
