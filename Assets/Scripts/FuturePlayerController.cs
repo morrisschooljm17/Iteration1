@@ -56,7 +56,7 @@ public class FuturePlayerController : MonoBehaviour
             bool pastDrama(){
                 if(playerDirectionRight){
                     foreach(GameObject avoid in avoidTheseThings){
-                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartRight, avoid.transform.position-rayCastStartRight, 100f, dramaLayer);
+                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartRight, avoid.transform.position-rayCastStartRight, 50f, dramaLayer);
                         //Debug.DrawRay(rayCastStartRight, avoid.transform.position-rayCastStartRight, Color.green);
                         if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player" || hit.transform.tag == "DramaBox")){
                             return true;
@@ -65,7 +65,7 @@ public class FuturePlayerController : MonoBehaviour
                 }
                 else{
                     foreach(GameObject avoid in avoidTheseThings){
-                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, 100f, dramaLayer);
+                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, 50f, dramaLayer);
                         //Debug.DrawRay(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, Color.red);
                         if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player" || hit.transform.tag == "DramaBox")){
                             return true;
@@ -108,6 +108,7 @@ public class FuturePlayerController : MonoBehaviour
                     boxBeingHeld = movingBox;
                     boxBeingHeld.transform.parent = transform;
                     boxBeingHeld.simulated = false;
+                    boxBeingHeld.GetComponent<BoxScript>().pickedUpByPastPlayer();
                     grabbedBox = true;
                     holdingBox = true;
                     if(playerDirectionRight){boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);}
@@ -148,7 +149,7 @@ public class FuturePlayerController : MonoBehaviour
                 if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox")){}
                 else{
                     futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
-                }
+                }              
             }
             
 

@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
-        Physics2D.queriesHitTriggers = false;
 
     }
 
@@ -117,6 +116,7 @@ public class PlayerController : MonoBehaviour
                 boxBeingHeld = movingBox;
                 boxBeingHeld.transform.parent = transform;
                 boxBeingHeld.simulated = false;
+                boxBeingHeld.GetComponent<BoxScript>().pickedUpByCurrentPlayer();
                 grabbedBox = true;
                 holdingBox = true;
                 boxBeingHeld.tag = "DramaBox";

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3932,7 +3932,7 @@ MonoBehaviour:
   jumpSpeed: 12
   cameraMove: {fileID: 170982777}
   futurePlayerController: {fileID: 4231782389205167770}
-  futurePlayerDelay: 6
+  futurePlayerDelay: 6.5
   playerAnimator: {fileID: 5238157347670189103}
   isThereBoxes: 0
   boxPositions: []
