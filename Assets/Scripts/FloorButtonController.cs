@@ -12,7 +12,6 @@ public class FloorButtonController : MonoBehaviour
     private Vector3 originalPosition;
     private Vector3 newRedPlatePos;
     private bool playerOn = false;
-    private bool objectOn = false;
     private bool doorsOpen = false;
 
     // Start is called before the first frame update
