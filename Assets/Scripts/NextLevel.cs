@@ -9,11 +9,21 @@ public class NextLevel : MonoBehaviour
 {
     private bool lever;
     private int sceneNumber;
-    private int numberOfScenes = 8;
+    private int numberOfScenes = 0;
     // Start is called before the first frame update
     void Start()
     {
         sceneNumber = SceneManager.GetActiveScene().buildIndex + 1;
+        bool stop = true;
+        while(stop){
+            try{
+                SceneManager.GetSceneByBuildIndex(numberOfScenes);
+                numberOfScenes++;
+            }
+            catch{
+                stop = false;
+            }
+        }
     }
 
     // Update is called once per frame
