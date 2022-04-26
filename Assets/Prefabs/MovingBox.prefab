@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 3572761923788261883}
   m_Layer: 6
   m_Name: ShouldBe1
-  m_TagString: DramaBox
+  m_TagString: drama
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

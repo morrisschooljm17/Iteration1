@@ -67,10 +67,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("snap doesn't work");
             canSnap = false;
         }
-
-        Physics2D.queriesHitTriggers = false;
-
-
     }
 
     // Update is called once per frame
