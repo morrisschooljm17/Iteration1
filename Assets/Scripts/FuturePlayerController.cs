@@ -56,18 +56,18 @@ public class FuturePlayerController : MonoBehaviour
             bool pastDrama(){
                 if(playerDirectionRight){
                     foreach(GameObject avoid in avoidTheseThings){
-                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartRight, avoid.transform.position-rayCastStartRight, 100f, dramaLayer);
-                        Debug.DrawRay(rayCastStartRight, avoid.transform.position-rayCastStartRight, Color.green);
-                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player")){
+                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartRight, avoid.transform.position-rayCastStartRight, 50f, dramaLayer);
+                        //Debug.DrawRay(rayCastStartRight, avoid.transform.position-rayCastStartRight, Color.green);
+                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player" || hit.transform.tag == "DramaBox")){
                             return true;
                         }
                     }
                 }
                 else{
                     foreach(GameObject avoid in avoidTheseThings){
-                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, 100f, dramaLayer);
+                        RaycastHit2D hit = Physics2D.Raycast(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, 50f, dramaLayer);
                         //Debug.DrawRay(rayCastStartLeft, avoid.transform.position-rayCastStartLeft, Color.red);
-                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player")){
+                        if(hit.collider != null && (hit.transform.tag == "drama" || hit.transform.tag == "Player" || hit.transform.tag == "DramaBox")){
                             return true;
                         }
                     }  
@@ -108,6 +108,7 @@ public class FuturePlayerController : MonoBehaviour
                     boxBeingHeld = movingBox;
                     boxBeingHeld.transform.parent = transform;
                     boxBeingHeld.simulated = false;
+                    boxBeingHeld.GetComponent<BoxScript>().pickedUpByPastPlayer();
                     grabbedBox = true;
                     holdingBox = true;
                     if(playerDirectionRight){boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);}
@@ -122,8 +123,7 @@ public class FuturePlayerController : MonoBehaviour
             }
             if (hitTime)
             {
-                StartCoroutine(SpinPlayer(futureBody));
-                
+                StartCoroutine(SpinPlayer(futureBody));               
             }
             else if (hitLever)
             {
@@ -146,10 +146,10 @@ public class FuturePlayerController : MonoBehaviour
 
             futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
-                if(holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated){}
+                if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox") || futureBoxPositions[i].tag.Equals("MovedBox")){}
                 else{
                     futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
-                }
+                }              
             }
             
 
@@ -194,7 +194,7 @@ public class FuturePlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "drama" || col.gameObject.tag == "DramaBox")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -224,7 +224,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
-        if(col.gameObject.tag == "MovingBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
             onMovingBox = true;
             movingBox = col.gameObject.GetComponent<Rigidbody2D>();
         }
@@ -258,7 +258,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = null;
             onElevator = false;
         }
-        if(col.gameObject.tag == "MovingBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
             onMovingBox = false;
             movingBox = null;
         }
