@@ -17,8 +17,8 @@ public class BoxScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "DramaBox" || col.gameObject.tag == "Player"){
-            //transform.tag = "DramaBox";
+        if(col.gameObject.tag == "DramaBox" || col.gameObject.tag == "Player" || col.gameObject.tag == "MovedBox"){
+            transform.tag = "MovedBox";
             pickedUpByCurrentPlayer();
         }
     }

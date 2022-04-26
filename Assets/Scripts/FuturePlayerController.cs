@@ -146,7 +146,7 @@ public class FuturePlayerController : MonoBehaviour
 
             futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
-                if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox")){}
+                if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox") || futureBoxPositions[i].tag.Equals("MovedBox")){}
                 else{
                     futureBoxPositions[i].position = boxPos[i] + new Vector3(50, 0, 0);
                 }              
@@ -194,7 +194,7 @@ public class FuturePlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "drama" || col.gameObject.tag == "DramaBox")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -224,7 +224,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
-        if(col.gameObject.tag == "MovingBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
             onMovingBox = true;
             movingBox = col.gameObject.GetComponent<Rigidbody2D>();
         }
@@ -258,7 +258,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = null;
             onElevator = false;
         }
-        if(col.gameObject.tag == "MovingBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
             onMovingBox = false;
             movingBox = null;
         }

@@ -18,7 +18,7 @@ public class FloorButtonController : MonoBehaviour
     void Start()
     {
         originalPosition = pressurePlate.position;
-        newRedPlatePos = pressurePlate.position + new Vector3(0, -5f, 0);
+        newRedPlatePos = pressurePlate.position + new Vector3(0, -.15f, 0);
     }
 
     private void OpenOrCloseAllTheDoors(){
@@ -31,7 +31,7 @@ public class FloorButtonController : MonoBehaviour
         if(col.gameObject.tag == "Player"){         
             playerOn = true;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox"){
             boxes.AddLast(1);
         }
         spriteRenderer.sprite = greenBox;
@@ -45,7 +45,7 @@ public class FloorButtonController : MonoBehaviour
         if(col.gameObject.tag == "Player"){
             playerOn = false;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox"){
             boxes.RemoveFirst();
         }
         if(playerOn == false && boxes.Count == 0){

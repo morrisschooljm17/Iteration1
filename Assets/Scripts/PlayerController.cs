@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox")
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox")
         {
             onMovingBox = true;
             movingBox = col.gameObject.GetComponent<Rigidbody2D>();
@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
             elevator = null;
             onElevator = false;
         }
-        if ((col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox")){
+        if ((col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox")){
             boxesBeingTouched.RemoveFirst();
         }
         if(boxesBeingTouched.Count == 0)
