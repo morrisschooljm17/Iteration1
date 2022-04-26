@@ -13,6 +13,7 @@ public class LeverController : MonoBehaviour
     bool doorOpen = false;
     private Vector3 newPos;
     private Vector3 oldPos;
+    private AudioSource audioSource;
     private void Start()
     {
         newPos = door.transform.position + new Vector3(xAxis, yAxis, 0);
@@ -22,11 +23,15 @@ public class LeverController : MonoBehaviour
     {
         if (doorOpen)
         {
-            StopAllCoroutines();
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
+            StopAllCoroutines();           
             StartCoroutine(SmoothTranslation(oldPos, speed));
         }
         else
         {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
             StopAllCoroutines();
             StartCoroutine(SmoothTranslation(newPos, speed));
             if (timedDoor)
