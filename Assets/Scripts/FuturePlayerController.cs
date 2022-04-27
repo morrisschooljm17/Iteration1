@@ -258,7 +258,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = null;
             onElevator = false;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
+        if(col.gameObject.tag.Equals("MovingBox") || col.gameObject.tag.Equals("MovedBox")){
             onMovingBox = false;
             movingBox = null;
         }

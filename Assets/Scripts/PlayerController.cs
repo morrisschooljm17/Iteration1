@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private bool isThereBoxes;
     [SerializeField] private Transform[] boxPositions;
+    [SerializeField] private ClockScript clock;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
@@ -149,6 +150,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(LockOut());
                 timeMachine.timeTravel(mainRigidbody, cameraMove);
                 hitTime = true;
+                clock.subtractTime(futurePlayerDelay);
             }
         }
         Vector2 move = mainRigidbody.velocity;
