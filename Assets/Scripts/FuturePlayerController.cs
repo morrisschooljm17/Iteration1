@@ -81,7 +81,7 @@ public class FuturePlayerController : MonoBehaviour
         }
     }
     public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, 
-    bool elevator, bool grabbedBox, bool droppedBox, Vector3[] boxPos, float time)
+    bool elevator, bool grabbedBox, bool droppedBox, Vector3[] boxPos, bool pastHoldingBox, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -103,7 +103,7 @@ public class FuturePlayerController : MonoBehaviour
                 }
                 playerDirectionRight = true;
             }
-            if (grabbedBox){
+            if (grabbedBox || pastHoldingBox){
                 if (onMovingBox && (holdingBox == false)){
                     boxBeingHeld = movingBox;
                     boxBeingHeld.transform.parent = transform;
@@ -199,6 +199,12 @@ public class FuturePlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+    void OnTriggerStay2D(Collider2D col){
+                if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
+            onMovingBox = true;
+            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
+        }
+    }
         private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "TimeMachine")
@@ -224,10 +230,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
-            onMovingBox = true;
-            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
-        }
+
 
 
     }

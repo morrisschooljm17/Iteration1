@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
                 boxPos[i] = boxPositions[i].position;
             }
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
-            hitElevator, grabbedBox, droppedBox, boxPos, futurePlayerDelay);
+            hitElevator, grabbedBox, droppedBox, boxPos, holdingBox, futurePlayerDelay);
         }
         else if(isThereAFuturePlayer){
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
