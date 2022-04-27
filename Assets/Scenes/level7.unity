@@ -5637,6 +5637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4260001391751308262, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+      propertyPath: otherTimeMachine
+      value: 
+      objectReference: {fileID: 2088890362}
     - target: {fileID: 6784971480943139023, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
       propertyPath: m_Name
       value: TimeMachines
@@ -9070,6 +9074,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 120110274300358299, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+      propertyPath: m_Name
+      value: TimeMachine22
+      objectReference: {fileID: 0}
+    - target: {fileID: 120110274300358299, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+      propertyPath: m_TagString
+      value: ResetMachine
+      objectReference: {fileID: 0}
     - target: {fileID: 537364552329681920, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -9114,6 +9126,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1175482846919884860, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+      propertyPath: m_Name
+      value: TimeMachine21
+      objectReference: {fileID: 0}
     - target: {fileID: 6784971480943139023, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
       propertyPath: m_Name
       value: TimeMachines2
@@ -9136,6 +9152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+--- !u!4 &2088890362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3439685771774874536, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+  m_PrefabInstance: {fileID: 2088890361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2091416981
 GameObject:
   m_ObjectHideFlags: 0
