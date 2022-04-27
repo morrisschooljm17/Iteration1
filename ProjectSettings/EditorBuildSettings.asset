@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1b8bc29904e7ca64ab8795c8eca51f8a
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 7c1ce4b48be8a0446babd1c31aa34227
+  - enabled: 1
+    path: Assets/Scenes/TimeIntro.unity
+    guid: 33d6a0a109683bd41a50ee9393cbe6b3
+  - enabled: 1
     path: Assets/Scenes/level1.unity
     guid: 55edb4f6bf3a1004eae334fe4bc41c16
+  - enabled: 1
+    path: Assets/Scenes/ButtonIntro.unity
+    guid: 58920d70f9d2fda44a9c4f9678db9723
   - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: ee1eb29ef5d9bde409eae4e291f35db4
@@ -23,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level5.unity
     guid: eb742656dfc85fe46a26ad32dce4839a
+  - enabled: 1
+    path: Assets/Scenes/IntroPastYou.unity
+    guid: 7ca8f52e55d2c9d4ab9352fdffb3482f
   - enabled: 1
     path: Assets/Scenes/PressureIntrol.unity
     guid: 14962846f03c4fe46be65761126a536f
