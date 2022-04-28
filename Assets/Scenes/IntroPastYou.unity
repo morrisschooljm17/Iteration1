@@ -746,6 +746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimeMachine22
       objectReference: {fileID: 0}
+    - target: {fileID: 120110274300358299, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
+      propertyPath: m_TagString
+      value: ResetMachine
+      objectReference: {fileID: 0}
     - target: {fileID: 537364552329681920, guid: e7a0c105e4de0b042a342b5e5a328fca, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3135,7 +3139,7 @@ MonoBehaviour:
   up: 1
   xAxis: 0
   yAxis: -5
-  speed: 10
+  speed: 15
   timedDoor: 0
   doorCloseTimer: 0
 --- !u!251 &1957509830

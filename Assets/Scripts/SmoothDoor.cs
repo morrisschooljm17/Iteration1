@@ -33,10 +33,12 @@ public class SmoothDoor : MonoBehaviour
             //transform.Translate(oldPos * speed * Time.deltaTime);
         }
     }
-
-
     public void openDoor()
     {
-        doorOpen =! doorOpen;
+        doorOpen = true;
+    }
+        public void closeDoor()
+    {
+        doorOpen = false;
     }
 }
