@@ -2113,6 +2113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingBox3
       objectReference: {fileID: 0}
+    - target: {fileID: 1117858827615639487, guid: ebcc3dce9905fc240bccc7c71a54723e, type: 3}
+      propertyPath: m_TagString
+      value: DramaBox
+      objectReference: {fileID: 0}
     - target: {fileID: 5866387182879124766, guid: ebcc3dce9905fc240bccc7c71a54723e, type: 3}
       propertyPath: m_Name
       value: nolook1
