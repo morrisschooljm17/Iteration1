@@ -24,5 +24,8 @@ public class BoxScript : MonoBehaviour
             pickedUpByCurrentPlayer();
             
         }
+        if(col.gameObject.tag == "FuturePlayer"){
+            pickedUpByPastPlayer();   
+        }
     }
 }

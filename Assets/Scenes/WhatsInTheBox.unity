@@ -3807,7 +3807,7 @@ GameObject:
   - component: {fileID: 1210827818}
   m_Layer: 4
   m_Name: FuturePlayer
-  m_TagString: platform
+  m_TagString: FuturePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

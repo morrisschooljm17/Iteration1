@@ -19,6 +19,7 @@ TagManager:
   - DramaBox
   - MovedBox
   - Cure
+  - FuturePlayer
   layers:
   - Default
   - TransparentFX
