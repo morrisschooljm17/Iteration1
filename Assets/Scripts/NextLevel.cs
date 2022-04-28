@@ -41,12 +41,10 @@ public class NextLevel : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Trigger");
         lever = true;
     }
     void OnTriggerExit2D(Collider2D col)
     {
-        Debug.Log("Trigger left");
         lever = false;
     }
 }

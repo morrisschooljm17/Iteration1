@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/Scenes/level7.unity
     guid: be928c894af78c641b943834ee5be16b
   - enabled: 1
+    path: Assets/Scenes/IntroParadox.unity
+    guid: f4a0dd66cbaec4140937f7e1cdd7c42c
+  - enabled: 1
     path: Assets/Scenes/introToPastSelf.unity
     guid: fe51b431625079a47984920bca6f4bc2
   - enabled: 1

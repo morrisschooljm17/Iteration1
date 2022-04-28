@@ -201,9 +201,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void spinPlayerParadox(){
+        StartCoroutine(LockOut());
+        StartCoroutine(SpinPlayer(mainRigidbody));
+    }
     IEnumerator LockOut(){
         isNotLockedOut = false;
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.2f);
         isNotLockedOut = true;
     }
     IEnumerator SpinPlayer(Rigidbody2D player)
@@ -226,7 +230,7 @@ public class PlayerController : MonoBehaviour
     
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator){
                 playerAnimator.Play(playerRunOnButton);
             }
             else{
@@ -234,7 +238,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{

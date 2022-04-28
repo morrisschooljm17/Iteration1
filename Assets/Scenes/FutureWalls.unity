@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   futureBody: {fileID: 46984899}
+  thePlayer: {fileID: 684894578}
   futureSpriteRenderer: {fileID: 46984898}
   playerAnimator: {fileID: 46984897}
   boxCollider2D: {fileID: 46984896}
@@ -310,7 +311,7 @@ GameObject:
   - component: {fileID: 50180221}
   - component: {fileID: 50180220}
   - component: {fileID: 50180219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TimeMachineNoUse (1)
   m_TagString: ResetMachine
   m_Icon: {fileID: 0}
@@ -476,6 +477,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sign_browndoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4703141156808729859, guid: 5d1e60a5640a22d4eae121eeec2d68c9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4703141156808729862, guid: 5d1e60a5640a22d4eae121eeec2d68c9, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -555,7 +560,7 @@ GameObject:
   - component: {fileID: 172118155}
   - component: {fileID: 172118154}
   - component: {fileID: 172118153}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TimeMachineNoUse
   m_TagString: ResetMachine
   m_Icon: {fileID: 0}
@@ -796,10 +801,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   up: 0
   xAxis: 0
-  yAxis: -5.5
-  speed: 25
+  yAxis: 5.5
+  speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &188622115
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -904,7 +910,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188622113}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.01406, y: 2.833465, z: -15.635057}
+  m_LocalPosition: {x: -11.01406, y: -2.666535, z: -15.635057}
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 1771492581}
@@ -1257,6 +1263,7 @@ MonoBehaviour:
   speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &536865110
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -2259,7 +2266,7 @@ GameObject:
   - component: {fileID: 941307000}
   - component: {fileID: 941306999}
   - component: {fileID: 941306998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TimeMachine22
   m_TagString: TimeMachine
   m_Icon: {fileID: 0}
@@ -2444,9 +2451,10 @@ MonoBehaviour:
   up: 0
   xAxis: 0
   yAxis: -5.5
-  speed: 25
+  speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1013042973
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -2595,6 +2603,7 @@ MonoBehaviour:
   speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1030124505
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -3060,6 +3069,7 @@ MonoBehaviour:
   speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1309712153
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -3220,6 +3230,14 @@ PrefabInstance:
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198875997232781354, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Size.x
+      value: 0.2316685
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198875997232781354, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0021941625
       objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781356, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_Name
@@ -3951,6 +3969,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2198875997232781354, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Size.x
+      value: 0.23166984
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198875997232781354, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.004389178
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781356, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_Name
       value: lever1 (3)
@@ -4343,9 +4369,10 @@ MonoBehaviour:
   up: 0
   xAxis: 0
   yAxis: -5.5
-  speed: 25
+  speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1779826442
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -4476,10 +4503,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   up: 0
   xAxis: 0
-  yAxis: -5.5
-  speed: 25
+  yAxis: 5.5
+  speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1794487608
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -4584,7 +4612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794487606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.51407, y: 2.8334, z: -15.635057}
+  m_LocalPosition: {x: -6.51407, y: -2.6666, z: -15.635057}
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 1771492581}
@@ -5150,9 +5178,10 @@ MonoBehaviour:
   up: 0
   xAxis: 0
   yAxis: -5.5
-  speed: 25
+  speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &2062316907
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -5551,13 +5580,29 @@ GameObject:
   - component: {fileID: 4861543217983134589}
   - component: {fileID: 942142328812601287}
   - component: {fileID: 3408500803650846707}
-  m_Layer: 0
+  - component: {fileID: 7881628758267881039}
+  m_Layer: 8
   m_Name: TimeMachine12
   m_TagString: ResetMachine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7881628758267881039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881628758267881038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364ca64a8c967ab469b29597bc68e7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elevators:
+  - {fileID: 188622114}
+  - {fileID: 1794487607}
 --- !u!1 &8978976283618363625
 GameObject:
   m_ObjectHideFlags: 0
@@ -5569,7 +5614,7 @@ GameObject:
   - component: {fileID: 7706825176004162407}
   - component: {fileID: 1292865275600289024}
   - component: {fileID: 6027781932297524303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TimeMachine11
   m_TagString: ResetMachine
   m_Icon: {fileID: 0}

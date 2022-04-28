@@ -11,7 +11,7 @@ public class SmoothDoor : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private bool timedDoor;
     [SerializeField] private float doorCloseTimer;
-    bool doorOpen = false;
+    public bool doorOpen = false;
     private Vector3 newPos;
     private Vector3 oldPos;
 

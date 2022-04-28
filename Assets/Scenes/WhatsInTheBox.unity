@@ -721,6 +721,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &286617605
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -869,6 +870,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &291555518
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -1022,7 +1024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781356, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781357, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: door
@@ -1196,6 +1198,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &419105457
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -1613,6 +1616,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &521791653
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -2776,6 +2780,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &804094181
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -3820,6 +3825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   futureBody: {fileID: 1210827822}
+  thePlayer: {fileID: 1937023199}
   futureSpriteRenderer: {fileID: 1210827821}
   playerAnimator: {fileID: 1210827820}
   boxCollider2D: {fileID: 1210827819}
@@ -4084,6 +4090,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1262822360
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -4635,7 +4642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781356, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781357, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: door
@@ -5992,6 +5999,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1922327988
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -6787,6 +6795,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &2081306244
 PlatformEffector2D:
   m_ObjectHideFlags: 0

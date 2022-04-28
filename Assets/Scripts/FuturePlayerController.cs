@@ -8,6 +8,7 @@ public class FuturePlayerController : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D futureBody;
+    [SerializeField] private Rigidbody2D thePlayer;
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D boxCollider2D;
@@ -76,7 +77,8 @@ public class FuturePlayerController : MonoBehaviour
             }
             if (pastDrama())
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                futureDrama = false;
+                StartCoroutine(SpinActualPlayerToDEATH(thePlayer));
             }
         }
     }
@@ -155,6 +157,19 @@ public class FuturePlayerController : MonoBehaviour
 
         }
         return !hitTime;
+    }
+        IEnumerator SpinActualPlayerToDEATH(Rigidbody2D player)
+    {
+        Vector3 position = player.transform.position;
+
+        for (int i = 0; i < 50; i++)
+        {
+            player.transform.localScale += new Vector3(-.1f, -.1f, 0);
+            player.transform.position = position;
+            player.transform.Rotate(Vector3.forward * -45);
+            yield return new WaitForSeconds(.01f);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
         IEnumerator SpinPlayer(Rigidbody2D player)
     {
