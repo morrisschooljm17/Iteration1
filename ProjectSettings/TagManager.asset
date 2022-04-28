@@ -18,6 +18,7 @@ TagManager:
   - MovingBox
   - DramaBox
   - MovedBox
+  - Cure
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,6 @@ TagManager:
   - background
   - drama
   - seeThrough
-  - 
   - 
   - 
   - 

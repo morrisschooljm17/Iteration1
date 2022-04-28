@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WhatsInTheBox.unity
     guid: a1fe7cf8c17bf214aa2279e4cedfae36
+  - enabled: 1
+    path: Assets/Scenes/TheEnd.unity
+    guid: 8f1101f9bf0fee04a96d76b5b68d0e9e
   m_configObjects: {}

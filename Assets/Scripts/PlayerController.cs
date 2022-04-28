@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private string sceneName;
     private bool inPresent;
 
+    bool onCure;
     bool onTimeMachine = false;
     bool onLever = false;
     bool resetMachine = false;
@@ -230,7 +231,7 @@ public class PlayerController : MonoBehaviour
     
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure){
                 playerAnimator.Play(playerRunOnButton);
             }
             else{
@@ -238,7 +239,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -270,6 +271,10 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "ResetMachine")
         {
             resetMachine = true;
+        }
+        if (col.gameObject.tag == "Cure")
+        {
+            onCure = true;
         }
         if (col.gameObject.tag == "LeverandShut")
         {
@@ -305,6 +310,10 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "ResetMachine")
         {
             resetMachine = false;
+        }
+        if (col.gameObject.tag == "Cure")
+        {
+            onCure = false;
         }
         if (col.gameObject.tag == "LeverandShut")
         {

@@ -32,7 +32,7 @@ public class ClockScript : MonoBehaviour
     {
         timeToDisplay += 1;
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 1000);
         if (minutes < 0)
         {
             minutes = 0f;
