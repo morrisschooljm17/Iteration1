@@ -1352,7 +1352,7 @@ MonoBehaviour:
   jumpSpeed: 12
   cameraMove: {fileID: 1422860765}
   futurePlayerController: {fileID: 840699904}
-  futurePlayerDelay: 5
+  futurePlayerDelay: 5.5
   playerAnimator: {fileID: 684894575}
   isThereBoxes: 0
   boxPositions: []

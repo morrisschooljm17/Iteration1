@@ -1222,7 +1222,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: In these next few levels you will be in the same area as your past self.
     Do not let them see you or anything they didn't see in the past. This will create
-    a paradox and reset the level.
+    a paradox and pull you out of existence.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0515f62c6d94d474bbb84efe7433f332, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 0515f62c6d94d474bbb84efe7433f332, type: 2}
