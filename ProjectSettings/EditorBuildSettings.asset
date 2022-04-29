@@ -57,6 +57,10 @@ EditorBuildSettings:
     path: Assets/Scenes/BehindYou.unity
     guid: 8856b04125c46b84b81552d0c534dddb
   - enabled: 1
+
+    path: Assets/Scenes/level9.unity
+    guid: 3ee9a05b61272f14d93138500f10ac9a
+
     path: Assets/Scenes/WhatsInTheBox.unity
     guid: a1fe7cf8c17bf214aa2279e4cedfae36
   - enabled: 1

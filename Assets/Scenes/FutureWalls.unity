@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1367,6 +1367,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1579124059}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2836,6 +2840,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771492581}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2925,6 +2933,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771492581}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -3187,6 +3199,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771492581}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3496,6 +3512,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1579124059}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3585,6 +3605,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1579124059}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -3925,6 +3949,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771492581}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -5071,6 +5099,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1579124059}
     m_Modifications:
+    - target: {fileID: 423929642597575189, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2198875997232781352, guid: 169384acb9a75bb49aed2acf0eeb6bed, type: 3}
       propertyPath: m_RootOrder
       value: 10

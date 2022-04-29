@@ -10,9 +10,18 @@ public class NextLevel : MonoBehaviour
     private bool lever;
     private int sceneNumber;
     private int numberOfScenes = 0;
+    public bool keyExists;
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.Find("key") != null)
+        {
+            keyExists = true;
+        }
+        else 
+        {
+            keyExists = false;
+        }
         sceneNumber = SceneManager.GetActiveScene().buildIndex + 1;
         bool stop = true;
         while(stop){
@@ -29,11 +38,11 @@ public class NextLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && lever && sceneNumber < numberOfScenes)
+        if (Input.GetKeyDown(KeyCode.E) && !keyExists && lever && sceneNumber < numberOfScenes)
         {
             SceneManager.LoadScene(sceneNumber);
         }
-        else if(Input.GetKeyDown(KeyCode.E) && lever && sceneNumber == numberOfScenes)
+        else if(Input.GetKeyDown(KeyCode.E) && !keyExists && lever && sceneNumber == numberOfScenes)
         {
             SceneManager.LoadScene(0);
         }
