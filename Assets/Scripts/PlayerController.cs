@@ -67,10 +67,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("snap doesn't work");
             canSnap = false;
         }
-
-        Physics2D.queriesHitTriggers = false;
-
-
     }
 
     // Update is called once per frame
@@ -116,6 +112,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (resetMachine && isNotLockedOut)
             {
+                StartCoroutine(LockOut());
                 StartCoroutine(SpinPlayer(mainRigidbody));
 
             }
@@ -133,8 +130,10 @@ public class PlayerController : MonoBehaviour
                 boxBeingHeld = movingBox;
                 boxBeingHeld.transform.parent = transform;
                 boxBeingHeld.simulated = false;
+                boxBeingHeld.GetComponent<BoxScript>().pickedUpByCurrentPlayer();
                 grabbedBox = true;
                 holdingBox = true;
+                boxBeingHeld.tag = "DramaBox";
                 if(facingRight){boxBeingHeld.transform.position = transform.position + new Vector3(1f, -.05f, 0);}
                 else{boxBeingHeld.transform.position = transform.position + new Vector3(-1f, -.05f, 0);}
             }
@@ -241,6 +240,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    // private void OnCollisionEnter2D(Collision2D col)
+    // {
+    //     if (col.gameObject.tag == "MovingBox")
+    //     {
+    //         col.gameObject.tag = "DramaBox";
+    //     }
+    // }
+    private LinkedList<int> boxesBeingTouched = new LinkedList<int>();
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -268,9 +275,11 @@ public class PlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
-        if(col.gameObject.tag == "MovingBox"){
+        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox")
+        {
             onMovingBox = true;
             movingBox = col.gameObject.GetComponent<Rigidbody2D>();
+            boxesBeingTouched.AddLast(1);
         }
 
     }
@@ -301,7 +310,11 @@ public class PlayerController : MonoBehaviour
             elevator = null;
             onElevator = false;
         }
-        if(col.gameObject.tag == "MovingBox"){
+        if ((col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox")){
+            boxesBeingTouched.RemoveFirst();
+        }
+        if(boxesBeingTouched.Count == 0)
+        {
             onMovingBox = false;
             movingBox = null;
         }
