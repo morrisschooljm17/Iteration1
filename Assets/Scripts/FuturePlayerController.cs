@@ -78,7 +78,7 @@ public class FuturePlayerController : MonoBehaviour
             if (pastDrama())
             {
                 futureDrama = false;
-                StartCoroutine(SpinActualPlayerToDEATH(thePlayer));
+                thePlayer.GetComponent<PlayerController>().spinPlayerParadox();
             }
         }
     }
@@ -211,7 +211,8 @@ public class FuturePlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "drama" || col.gameObject.tag == "DramaBox")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            futureDrama = false;
+            thePlayer.GetComponent<PlayerController>().spinPlayerParadox();
         }
     }
     void OnTriggerStay2D(Collider2D col){
@@ -333,4 +334,3 @@ public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, boo
     }
 
 }
-
