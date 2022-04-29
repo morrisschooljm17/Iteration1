@@ -60,16 +60,5 @@ public class TimeMachine : MonoBehaviour
         yield return null;
     }
 
-/*    void OnTriggerEnter2D(Collider2D col)
-    {
-        Debug.Log("Trigger");
-        objectMove = col.GetComponent<Transform>();
-        lever = true;
-    }
-    void OnTriggerExit2D(Collider2D col)
-    {
-        Debug.Log("Trigger left");
-        objectMove = null;
-        lever = false;
-    }*/
+
 }

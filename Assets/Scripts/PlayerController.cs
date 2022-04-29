@@ -56,17 +56,12 @@ public class PlayerController : MonoBehaviour
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
 
-
-        Debug.Log(sceneName);
-
         if (GameObject.Find("snapTrigger") != null)
         {
-            Debug.Log("snap works");
             canSnap = true;
         }
         else
         {
-            Debug.Log("snap doesn't work");
             canSnap = false;
         }
     }
@@ -88,16 +83,16 @@ public class PlayerController : MonoBehaviour
             return raycastHit2d.collider != null;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightShift)) 
+        if (canSnap && Input.GetKeyDown(KeyCode.F)) 
         {
 
-            if (canSnap && inPresent) {                
+            if (inPresent) {                
                 transform.position += new Vector3(50, 0, 0);
                 cameraMove.transform.position += new Vector3(50, 0, 0);
                 inPresent = false;                               
             }
 
-            else if (canSnap && !inPresent)
+            else if (!inPresent)
             {               
                 transform.position += new Vector3(-50, 0, 0);
                 cameraMove.transform.position += new Vector3(-50, 0, 0);

@@ -1679,8 +1679,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You may have noticed your past self there. Use the him and the timer to
-    solve these next few levels.
+  m_text: Back to regular time machines. You will now need to use your past self
+    to beat the next few levels. Use the timer if you need help timing.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0515f62c6d94d474bbb84efe7433f332, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 0515f62c6d94d474bbb84efe7433f332, type: 2}
@@ -2140,6 +2140,7 @@ MonoBehaviour:
   speed: 10
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1386543142
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -3142,6 +3143,7 @@ MonoBehaviour:
   speed: 15
   timedDoor: 0
   doorCloseTimer: 0
+  doorOpen: 0
 --- !u!251 &1957509830
 PlatformEffector2D:
   m_ObjectHideFlags: 0
