@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1b8bc29904e7ca64ab8795c8eca51f8a
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 7c1ce4b48be8a0446babd1c31aa34227
+  - enabled: 1
+    path: Assets/Scenes/TimeIntro.unity
+    guid: 33d6a0a109683bd41a50ee9393cbe6b3
+  - enabled: 1
     path: Assets/Scenes/level1.unity
     guid: 55edb4f6bf3a1004eae334fe4bc41c16
+  - enabled: 1
+    path: Assets/Scenes/ButtonIntro.unity
+    guid: 58920d70f9d2fda44a9c4f9678db9723
   - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: ee1eb29ef5d9bde409eae4e291f35db4
@@ -18,8 +27,17 @@ EditorBuildSettings:
     path: Assets/Scenes/level3.unity
     guid: 68bb30c1fbd6cee4f969dd6eb6272203
   - enabled: 1
+    path: Assets/Scenes/level8.unity
+    guid: 68701231b8bf01641b61c44e68758832
+  - enabled: 1
     path: Assets/Scenes/level4.unity
     guid: e467264b88f5731408d858730d1b516c
+  - enabled: 1
+    path: Assets/Scenes/level9.unity
+    guid: 3ee9a05b61272f14d93138500f10ac9a
+  - enabled: 1
+    path: Assets/Scenes/IntroPastYou.unity
+    guid: 7ca8f52e55d2c9d4ab9352fdffb3482f
   - enabled: 1
     path: Assets/Scenes/level5.unity
     guid: eb742656dfc85fe46a26ad32dce4839a
@@ -33,6 +51,9 @@ EditorBuildSettings:
     path: Assets/Scenes/level7.unity
     guid: be928c894af78c641b943834ee5be16b
   - enabled: 1
+    path: Assets/Scenes/IntroParadox.unity
+    guid: f4a0dd66cbaec4140937f7e1cdd7c42c
+  - enabled: 1
     path: Assets/Scenes/introToPastSelf.unity
     guid: fe51b431625079a47984920bca6f4bc2
   - enabled: 1
@@ -42,11 +63,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BehindYou.unity
     guid: 8856b04125c46b84b81552d0c534dddb
   - enabled: 1
-
-    path: Assets/Scenes/level9.unity
-    guid: 3ee9a05b61272f14d93138500f10ac9a
-
     path: Assets/Scenes/WhatsInTheBox.unity
     guid: a1fe7cf8c17bf214aa2279e4cedfae36
-
+  - enabled: 1
+    path: Assets/Scenes/TheEnd.unity
+    guid: 8f1101f9bf0fee04a96d76b5b68d0e9e
   m_configObjects: {}

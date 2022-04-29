@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private bool isThereBoxes;
     [SerializeField] private Transform[] boxPositions;
+    [SerializeField] private ClockScript clock;
     private TimeMachine timeMachine;
     private LeverController leverController;
     private LeverandShut leverAndShut;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private string sceneName;
     private bool inPresent;
 
+    bool onCure;
     bool onTimeMachine = false;
     bool onLever = false;
     bool resetMachine = false;
@@ -54,17 +56,12 @@ public class PlayerController : MonoBehaviour
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
 
-
-        Debug.Log(sceneName);
-
         if (GameObject.Find("snapTrigger") != null)
         {
-            Debug.Log("snap works");
             canSnap = true;
         }
         else
         {
-            Debug.Log("snap doesn't work");
             canSnap = false;
         }
     }
@@ -86,16 +83,16 @@ public class PlayerController : MonoBehaviour
             return raycastHit2d.collider != null;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightShift)) 
+        if (canSnap && Input.GetKeyDown(KeyCode.F)) 
         {
 
-            if (canSnap && inPresent) {                
+            if (inPresent) {                
                 transform.position += new Vector3(50, 0, 0);
                 cameraMove.transform.position += new Vector3(50, 0, 0);
                 inPresent = false;                               
             }
 
-            else if (canSnap && !inPresent)
+            else if (!inPresent)
             {               
                 transform.position += new Vector3(-50, 0, 0);
                 cameraMove.transform.position += new Vector3(-50, 0, 0);
@@ -149,6 +146,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(LockOut());
                 timeMachine.timeTravel(mainRigidbody, cameraMove);
                 hitTime = true;
+                clock.subtractTime(futurePlayerDelay);
             }
         }
         Vector2 move = mainRigidbody.velocity;
@@ -191,7 +189,7 @@ public class PlayerController : MonoBehaviour
                 boxPos[i] = boxPositions[i].position;
             }
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
-            hitElevator, grabbedBox, droppedBox, boxPos, futurePlayerDelay);
+            hitElevator, grabbedBox, droppedBox, boxPos, holdingBox, futurePlayerDelay);
         }
         else if(isThereAFuturePlayer){
             isThereAFuturePlayer = futurePlayerController.moveFuturePlayer(move, transform.position, hitTime, hitLever, hitLeverandShut, 
@@ -199,9 +197,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void spinPlayerParadox(){
+        StartCoroutine(LockOut());
+        StartCoroutine(SpinPlayer(mainRigidbody));
+    }
     IEnumerator LockOut(){
         isNotLockedOut = false;
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.2f);
         isNotLockedOut = true;
     }
     IEnumerator SpinPlayer(Rigidbody2D player)
@@ -224,7 +226,7 @@ public class PlayerController : MonoBehaviour
     
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure){
                 playerAnimator.Play(playerRunOnButton);
             }
             else{
@@ -232,7 +234,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -264,6 +266,10 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "ResetMachine")
         {
             resetMachine = true;
+        }
+        if (col.gameObject.tag == "Cure")
+        {
+            onCure = true;
         }
         if (col.gameObject.tag == "LeverandShut")
         {
@@ -299,6 +305,10 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "ResetMachine")
         {
             resetMachine = false;
+        }
+        if (col.gameObject.tag == "Cure")
+        {
+            onCure = false;
         }
         if (col.gameObject.tag == "LeverandShut")
         {

@@ -25,8 +25,6 @@ public class McguffinTrigger : MonoBehaviour
 
             if (textObject != null) {
 
-                Debug.Log("HERE");
-
                 textObject.enabled = true;
             }
 

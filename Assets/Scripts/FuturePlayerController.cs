@@ -8,6 +8,7 @@ public class FuturePlayerController : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D futureBody;
+    [SerializeField] private Rigidbody2D thePlayer;
     [SerializeField] private SpriteRenderer futureSpriteRenderer;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D boxCollider2D;
@@ -76,12 +77,13 @@ public class FuturePlayerController : MonoBehaviour
             }
             if (pastDrama())
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                futureDrama = false;
+                StartCoroutine(SpinActualPlayerToDEATH(thePlayer));
             }
         }
     }
     public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, bool hitLever, bool hitLevernadShut, 
-    bool elevator, bool grabbedBox, bool droppedBox, Vector3[] boxPos, float time)
+    bool elevator, bool grabbedBox, bool droppedBox, Vector3[] boxPos, bool pastHoldingBox, float time)
     {
         StartCoroutine(MoveFutureSelf());
         IEnumerator MoveFutureSelf()
@@ -103,7 +105,8 @@ public class FuturePlayerController : MonoBehaviour
                 }
                 playerDirectionRight = true;
             }
-            if (grabbedBox){
+            futureBody.position = move + new Vector2(50, 0);
+            if (grabbedBox || pastHoldingBox){
                 if (onMovingBox && (holdingBox == false)){
                     boxBeingHeld = movingBox;
                     boxBeingHeld.transform.parent = transform;
@@ -144,7 +147,6 @@ public class FuturePlayerController : MonoBehaviour
                 handleAnimation(playerIdle);
             }
 
-            futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
                 if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox") || futureBoxPositions[i].tag.Equals("MovedBox")){}
                 else{
@@ -155,6 +157,19 @@ public class FuturePlayerController : MonoBehaviour
 
         }
         return !hitTime;
+    }
+        IEnumerator SpinActualPlayerToDEATH(Rigidbody2D player)
+    {
+        Vector3 position = player.transform.position;
+
+        for (int i = 0; i < 50; i++)
+        {
+            player.transform.localScale += new Vector3(-.1f, -.1f, 0);
+            player.transform.position = position;
+            player.transform.Rotate(Vector3.forward * -45);
+            yield return new WaitForSeconds(.01f);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
         IEnumerator SpinPlayer(Rigidbody2D player)
     {
@@ -199,6 +214,12 @@ public class FuturePlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+    void OnTriggerStay2D(Collider2D col){
+                if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
+            onMovingBox = true;
+            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
+        }
+    }
         private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "TimeMachine")
@@ -224,10 +245,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
-            onMovingBox = true;
-            movingBox = col.gameObject.GetComponent<Rigidbody2D>();
-        }
+
 
 
     }
@@ -258,7 +276,7 @@ public class FuturePlayerController : MonoBehaviour
             elevator = null;
             onElevator = false;
         }
-        if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "MovedBox"){
+        if(col.gameObject.tag.Equals("MovingBox") || col.gameObject.tag.Equals("MovedBox")){
             onMovingBox = false;
             movingBox = null;
         }

@@ -10,7 +10,6 @@ public class KillPlane : MonoBehaviour
     {
         if (otherObj.gameObject.tag == "Player")
         {
-            Debug.Log("collided");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7050584522344675090}
   - component: {fileID: 4032247918963224411}
   - component: {fileID: 4865841827808196390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TimeMachine12
   m_TagString: TimeMachine
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 9023720717972469205}
   - component: {fileID: 4260001391751308262}
   - component: {fileID: 4570423046629743770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TimeMachine11
   m_TagString: TimeMachine
   m_Icon: {fileID: 0}
