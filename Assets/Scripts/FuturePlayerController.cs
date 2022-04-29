@@ -105,7 +105,6 @@ public class FuturePlayerController : MonoBehaviour
                 }
                 playerDirectionRight = true;
             }
-            futureBody.position = move + new Vector2(50, 0);
             if (grabbedBox || pastHoldingBox){
                 if (onMovingBox && (holdingBox == false)){
                     boxBeingHeld = movingBox;
@@ -147,6 +146,7 @@ public class FuturePlayerController : MonoBehaviour
                 handleAnimation(playerIdle);
             }
 
+            futureBody.position = move + new Vector2(50, 0);
             for(int i = 0; i < boxPos.Length; i++){
                 if((holdingBox && !futureBoxPositions[i].GetComponent<Rigidbody2D>().simulated) || futureBoxPositions[i].tag.Equals("DramaBox") || futureBoxPositions[i].tag.Equals("MovedBox")){}
                 else{
@@ -333,3 +333,4 @@ public bool moveFuturePlayer(Vector2 direction, Vector2 move,  bool hitTime, boo
     }
 
 }
+
