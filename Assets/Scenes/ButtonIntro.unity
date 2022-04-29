@@ -1064,6 +1064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sign_browndoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4703141156808729859, guid: 5d1e60a5640a22d4eae121eeec2d68c9, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4703141156808729862, guid: 5d1e60a5640a22d4eae121eeec2d68c9, type: 3}
       propertyPath: m_RootOrder
       value: 1
