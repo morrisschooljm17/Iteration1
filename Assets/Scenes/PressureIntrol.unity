@@ -1749,28 +1749,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
-      propertyPath: futureBody
+      propertyPath: thePlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 841681598}
     - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
       propertyPath: futureDrama
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
-      propertyPath: boxCollider2D
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
-      propertyPath: playerAnimator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
       propertyPath: dramaLayer.m_Bits
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
-      propertyPath: futureSpriteRenderer
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2192264541120772723, guid: a0f1374ed63c7b840973c43ecf59a712, type: 3}
       propertyPath: avoidTheseThings.Array.size
