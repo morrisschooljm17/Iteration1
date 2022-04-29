@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool isNotLockedOut = true;
     public bool isThereAFuturePlayer;
     public bool canSnap;
+    bool onDoor;
 
     const String playerRun = "playerRunning";
     const String playerIdle = "Idle";
@@ -226,7 +227,7 @@ public class PlayerController : MonoBehaviour
     
     private void handleAnimation(String anim){
         if(Equals(anim, playerRun)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure || onDoor){
                 playerAnimator.Play(playerRunOnButton);
             }
             else{
@@ -234,7 +235,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(Equals(anim, playerIdle)){
-            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure){
+            if(onLever || onLeverandShut || onTimeMachine || resetMachine || holdingBox || onMovingBox || onElevator || onCure || onDoor){
                 playerAnimator.Play(playerIdleOnButton);
             }
             else{
@@ -281,6 +282,10 @@ public class PlayerController : MonoBehaviour
             elevator = col.GetComponent<SmoothDoorController>();
             onElevator = true;
         }
+        if (col.gameObject.tag == "door")
+        {
+            onDoor = true;
+        }
         if(col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox")
         {
             onMovingBox = true;
@@ -322,6 +327,10 @@ public class PlayerController : MonoBehaviour
         }
         if ((col.gameObject.tag == "MovingBox" || col.gameObject.tag == "DramaBox" || col.gameObject.tag == "MovedBox")){
             boxesBeingTouched.RemoveFirst();
+        }
+        if (col.gameObject.tag == "door")
+        {
+            onDoor = false;
         }
         if(boxesBeingTouched.Count == 0)
         {
