@@ -7,8 +7,8 @@ public class FailCondition : MonoBehaviour
 {
 
 
-    [SerializeField] private GameObject failPrompt;
-    [SerializeField] private GameObject nextLevelDoor;
+    //[SerializeField] private GameObject failPrompt;
+    //[SerializeField] private GameObject nextLevelDoor;
     // Start is called before the first frame update
     void Start()
     {

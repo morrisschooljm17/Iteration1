@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             return raycastHit2d.collider != null;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z)) 
+        if (Input.GetKeyDown(KeyCode.RightShift)) 
         {
 
             if (canSnap && inPresent) {                
