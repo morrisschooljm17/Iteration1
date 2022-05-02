@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator LockOut(){
         isNotLockedOut = false;
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(3f);
         isNotLockedOut = true;
     }
     IEnumerator SpinPlayer(Rigidbody2D player)
