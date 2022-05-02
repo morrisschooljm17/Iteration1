@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class KeyScript : MonoBehaviour
 {
-
+    [SerializeField] AudioSource audioSource;
     private bool keyTrigger;
     public NextLevel NL;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class KeyScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && keyTrigger)
         {
+            audioSource.Play();
             Destroy(gameObject);
             NL.keyExists = false;
 
