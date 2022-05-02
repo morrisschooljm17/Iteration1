@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
         }
 
         move.x = hor * moveSpeed;
-        if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && IsGrounded())
         {
             move.y = jumpSpeed;
 
